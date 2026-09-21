@@ -90,30 +90,41 @@ function displayGames(gameList) {
     }).join(""); //det samler vores html stringer som map laver til en lang html-stirng.
     
 
+
     //=========DOM-MANIPULATION==========
     gamesContainer.innerHTML =html; //Her indsættes det i vores HTML i vores gamesContainer.
 
 
-  const gameList = document.querySelector("#game-list");
-  const favoriteIconSrc = isFavorite(game.title)
-    ? "Images/Favorit fyldt ikon.png"
-    : "Images/Favorit tomt ikon.png";
+    //=========FAVORITKNAPPER==========
 
-  const gameHTML = `
-    <article class="game-card">
-        <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
-        <img src="${favoriteIconSrc}" alt="Favorit" class="favorite-icon" onclick="toggleFavorite(event, '${game.title}')">
-      <div class="game-info">
-        <h2>${game.title} <span class="game-rating"><img src="Images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</span></h2>
-        <p class="game-shelf">Hylde ${game.shelf}</p>
-        <p class="game-players"><img src="Images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</p>
-        <p class="game-playtime"><img src="Images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter </p>
-        <p class="game-genre"><img src="Images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</p>  
-      </div>
-    </article>
-  `;
+        //vi samler alle favorit knapperne i en variable ved at søge efter alle elementer med classen favorite-btn
+        const favoriteButtons = gamesContainer.querySelectorAll(".favorite-btn");
 
-  gameList.insertAdjacentHTML("beforeend", gameHTML);
+        favoriteButtons.forEach((button) => {
+            button.addEventListener("click", (event) => {
+                event.stopPropagation(); //dette gør sådan at kørtet ikke også åbnes, når favoritknappen klikkes.
+                const gameId = Number(button.dataset.id); //hvorefter den så skal hente hver id og lave det om et tal
+            toggleFavorite(gameId);
+
+            //Tilgængelighed til tastaturnavigation
+            //Når der klikkes på en favoritknap gentegnes hele listen, så for at sørge for at brugeren starter samme sted som før med tab, altså at de ikke mister deres position:
+            const sameButton = gamesContainer.querySelector (
+                `.favorite-btn[data-id="${gameId}"]`     //vi finder samme favoritknap, og gemmer den i const sameButton
+            );
+            if (sameButton) {
+                sameButton.focus(); //gør den valgte favorit knap aktiv igen
+            }
+
+            });
+        });
+
+
+
+}
+
+
+
+
 
   // Tilføj click event til den nye card
   const newCard = gameList.lastElementChild;
@@ -129,7 +140,7 @@ function displayGames(gameList) {
       showGameModal(game);
     }
   });
-}
+
 
 
 
