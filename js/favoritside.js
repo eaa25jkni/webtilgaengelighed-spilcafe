@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", initApp);
         function toggleFavorite(id) {
             if (favoriteIds.includes(id)) {
                 favoriteIds = favoriteIds.filter((favoriteId) => {
-                    return favoriteId !== id; //tjekker på en id, hvis det er inkluderet, så er det true, og så skal den Så fjerne id fra arrayet.
+                    favoriteId !== id; //tjekker på en id, hvis det er inkluderet, så er det true, og så skal den Så fjerne id fra arrayet.
                 });
             } else {
                 favoriteIds.push(id);  //hvis ikke id findes på listen, så er det false og den kører push, hvor den tilføjer id'et favorite id
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", initApp);
 
             localStorage.setItem("favoriteGames", JSON.stringify(favoriteIds)); //Vi gemmer i localstorage
 
-            displayGames(allGames); //Så kører vi listen igen, således ikonerne opdateres
+            displayFavorites(); //Så kører vi listen igen, således ikonerne opdateres
         }
 
         // Opdater alle ikoner og aria for et specifikt spil
@@ -92,7 +92,7 @@ function displayFavorites() {
 
     const html = favoriteGames
     .map((game) => {      //.map kører igennem vores games, og skal tjekke om spillet er en favorit, og dermed bliver det rigtige ikon vist.
-        
+
     return `
         <article class="game-card">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
@@ -121,15 +121,20 @@ function displayFavorites() {
     .join(""); //det samler vores html stringer som map laver til en lang html-stirng.
     
 
-
     //=========DOM-MANIPULATION==========
-    gamesContainer.innerHTML = html; //Her indsættes det i vores HTML i vores gamesContainer.
+    favoritesContainer.innerHTML = html; //Her indsættes det i vores HTML i vores gamesContainer.
+
+    addFavoriteButtonListeners(favoriteGames);
+    addCardListeners(favoriteGames);
+
+}
 
 
     //=========FAVORITKNAPPER==========
 
+    function addFavoriteButtonListeners(gameList) {
         //vi samler alle favorit knapperne i en variable ved at søge efter alle elementer med classen favorite-btn
-        const favoriteButtons = gamesContainer.querySelectorAll(".favorite-btn");
+        const favoriteButtons = favoritesContainer.querySelectorAll(".favorite-btn");
 
         favoriteButtons.forEach((button) => {
             button.addEventListener("click", (event) => {
@@ -148,6 +153,7 @@ function displayFavorites() {
 
             });
         });
+    }
 
 
     //=========ÅBEN MODAL===========
@@ -175,7 +181,7 @@ function displayFavorites() {
             });
 
         });
-}
+
 
 
 // ===== MODAL =====
