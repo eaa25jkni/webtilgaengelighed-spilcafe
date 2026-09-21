@@ -4,36 +4,48 @@
 document.addEventListener("DOMContentLoaded", initApp);
 
 // ===== GLOBALE VARIABLER =====
-let allGames = [];
+    let allGames = [];
+
+    const gamesContainer = document.querySelector("#game-list");
+
+    let favoriteIds = JSON.parse(localStorage.getItem("favoriteGames")) || []; //vi henter dataen fra local storage om vi har nogle favorit brætspil. hvis der ikke er noget oprettes der en tom liste []
+
+
+
 
 // ===== INITIALISERING =====
-function initApp() {
-  console.log("initApp: app.js is running 🎉");
-  getGames(); // Hent alle games fra JSON og start applikationen
-}
+    function initApp() {
+        console.log("javaScript kører");
+        getGames(); // Hent alle games fra JSON og start applikationen
+    }
   
 
 
 
 // ===== DATA HENTNING =====
-async function getGames() {
-  // Hent data fra JSON - husk at URL er anderledes!
-  // Gem data i allGames variablen
-  // Kald andre funktioner (hvilke?)
+    async function getGames() {
+    
+        console.log("🌐 Henter alle games fra JSON...");
+        const response = await fetch(
+            "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/games.json"
+        );
 
-  console.log("🌐 Henter alle games fra JSON...");
-  const response = await fetch(
-    "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/games.json"
-  );
-  allGames = await response.json();
-  console.log(`📊 JSON data modtaget: ${allGames.length} games`);
-  populateGenreDropdown(); // Udfyld dropdown med genres <-----
-  LocationDropdown(); // Udfyld dropdown med locations <-----
-  displayGames(allGames);
-  populateCarousel(); // Tilføj top-rated games til karrussel
-  populateScrollCarousel(); // Tilføj nyere games til scroll-karrussel
-  updateActiveFiltersDisplay(); // Initialiser aktive filtre display
+        allGames = await response.json();
+        console.log(`📊 JSON data modtaget: ${allGames.length} games`);
+
+        //populateGenreDropdown(); // Udfyld dropdown med genres <-----
+        //LocationDropdown(); // Udfyld dropdown med locations <-----
+        displayGames(allGames);
+        //populateCarousel(); // Tilføj top-rated games til karrussel
+        //populateScrollCarousel(); // Tilføj nyere games til scroll-karrussel
+        //updateActiveFiltersDisplay(); // Initialiser aktive filtre display
+    }
+
+function isFavorite(id) {
+    return favoriteIds.includes(id);
 }
+
+
 
 // ===== VISNING =====  // Vis alle games - loop gennem og kald displayGame() for hver game
 function displayGames(games) {
