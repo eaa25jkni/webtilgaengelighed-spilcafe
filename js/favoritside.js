@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", initApp);
 // ===== GLOBALE VARIABLER =====
     let allGames = [];
 
-    const gamesContainer = document.querySelector("#game-list");
+    const favoritesContainer = document.querySelector("#favorites-list");
 
     let favoriteIds = JSON.parse(localStorage.getItem("favoriteGames")) || []; //vi henter dataen fra local storage om vi har nogle favorit brætspil. hvis der ikke er noget oprettes der en tom liste []
 
@@ -79,19 +79,20 @@ document.addEventListener("DOMContentLoaded", initApp);
 // ===== VISNING =====  
 
 // Vis ÉT game card til game list
-function displayGames(gameList) {
+function displayFavorites() {
 
-    const html = gameList
+    const favoriteGames = allGames.filter((game) => {
+        return favoriteIds.includes(game.id);
+    });
+
+    if (favoriteGames.length === 0) {
+        favoritesContainer.innerHTML = "<p>Du har ingen spil på favoritlisten endnu.</p>"
+        return;
+    }
+
+    const html = favoriteGames
     .map((game) => {      //.map kører igennem vores games, og skal tjekke om spillet er en favorit, og dermed bliver det rigtige ikon vist.
-        let favoriteIcon
-
-        if (isFavorite(game.id)) { //hvis favorit id'et er true, så skal der vises en fyldt hjerte
-            favoriteIcon = "images/favorit-fyldt-ikon.png"
-
-        } else { //hvis ikke så skal stjernen være tom
-            favoriteIcon = "images/favorit-tomt-ikon.png"
-        }
-
+        
     return `
         <article class="game-card">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
