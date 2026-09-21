@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", initApp);
         }
 
         // Opdater alle ikoner og aria for et specifikt spil
-        function updateFavoriteIcons(button, id) {
+        function updateFavoriteButton(button, id) {
         const fav = isFavorite(id);
-            button.setAntribute("aria-pressed", fav) //tilføjer antributten aria-pressed
+            button.setAttribute("aria-pressed", fav) //tilføjer antributten aria-pressed
             button.querySelector("img").scr = fav 
             ? "images/favorit-fyldt-ikon.png" //hvis fav er sand, så skal hjertet være fyldt
             : "images/favorit-tomt-ikon.png"; //hvis falsk skal hjertet være tomt
@@ -95,7 +95,7 @@ function displayGames(gameList) {
     return `
         <article class="game-card">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
-                <button type="button" class="favorite-btn" data-id="${game.id} aria-pressed="${isFavorite(game.Id)}" aria-label="Favoritknap">
+                <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
                     <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon"/>
                 </button>
                 
@@ -110,18 +110,19 @@ function displayGames(gameList) {
                     <li class="game-shelf">Hylde ${game.shelf}</li>
                     <li class="game-players"><img src="images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
                     <li class="game-playtime"><img src="images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-                    <li class="game-genre"<img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                    <li class="game-genre"></li><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
                 </ul>
             </div>
         </article>
     
     `;
-    }).join(""); //det samler vores html stringer som map laver til en lang html-stirng.
+    })
+    .join(""); //det samler vores html stringer som map laver til en lang html-stirng.
     
 
 
     //=========DOM-MANIPULATION==========
-    gamesContainer.innerHTML =html; //Her indsættes det i vores HTML i vores gamesContainer.
+    gamesContainer.innerHTML = html; //Her indsættes det i vores HTML i vores gamesContainer.
 
 
     //=========FAVORITKNAPPER==========
@@ -164,7 +165,7 @@ function displayGames(gameList) {
 
             //Så man kan bruge tab og enter eller mellemrum til at åbne modalen
             card.addEventListener("keydown", (event) => {
-                if (event.target !==card) return; //så fokus kun gælder når det er på selve kortet og ikke når det er på favoritknappen som ligger inden i kortet.
+                if (event.target !== card) return; //så fokus kun gælder når det er på selve kortet og ikke når det er på favoritknappen som ligger inden i kortet.
 
                 if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault(); //som standart ruller mellemrumtasten ned på siden, det ville vi gerne undgå når de klikker på kortet. Derfor siger vi dette
@@ -177,43 +178,50 @@ function displayGames(gameList) {
 
 
 // ===== MODAL =====
-function showGameModal(game) {
-  console.log("🎭 Åbner modal for:", game.title);
+    function showGameModal(game) {
+    console.log("🎭 Åbner modal for:", game.title);
 
-  // Byg HTML struktur dynamisk
-  const dialogContent = document.querySelector("#dialog-content");
-  const favoriteIconSrc = isFavorite(game.id)
-    ? "images/favorit-fyldt-ikon.png"
-    : "images/favorit-tomt-ikon.png";
+    // Byg HTML struktur dynamisk
+    const dialogContent = document.querySelector("#dialog-content");
+    const favoriteIconSrc = isFavorite(game.id)
+        ? "images/favorit-fyldt-ikon.png"
+        : "images/favorit-tomt-ikon.png";
 
-  dialogContent.innerHTML = `
-  <article class="modal-game-card">
+    dialogContent.innerHTML = `
+    <article class="modal-game-card">
 
-    <div class="game-poster-container">
-        <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
-        <button type="button" class="favorite-btn" data-id="${game.id} aria-pressed="${isFavorite(game.Id)}" aria-label="Favoritknap">
-                    <img src="${favoriteIconSrc}" alt="FavoritKnap" class="favorite-icon"/>
-        </button>
-    </div>
-
-    <div class="dialog-game-info">
-        <h1>${game.title} </h1>
-        <p class="game-description">${game.description}</p>
-        <p class="game-shelf">Hylde ${game.shelf}</p>
-
-        <ul class="game-icons-grid">
-            <li class="game-genre"><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
-            <li class="game-rating"><img src="images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</li>
-            <li class="game-players"><img src="images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
-            <li class="game-playtime"><img src="images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-            <li class="game-age"><img src="images/Alder ikon.png" alt="Age" class="age-icon"> ${game.age}+</li>
-            <li class="game-difficulty"><img src="images/Sværhedsgrad ikon.png" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</li>
-        </ul>
-
-        <p class="game-rules">${game.rules}</p>
+        <div class="game-poster-container">
+            <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
+            <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
+                        <img src="${favoriteIconSrc}" alt="FavoritKnap" class="favorite-icon"/>
+            </button>
         </div>
-      </article>
-  `;
+
+        <div class="dialog-game-info">
+            <h1>${game.title} </h1>
+            <p class="game-description">${game.description}</p>
+            <p class="game-shelf">Hylde ${game.shelf}</p>
+
+            <ul class="game-icons-grid">
+                <li class="game-genre"><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                <li class="game-rating"><img src="images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</li>
+                <li class="game-players"><img src="images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
+                <li class="game-playtime"><img src="images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
+                <li class="game-age"><img src="images/Alder ikon.png" alt="Age" class="age-icon"> ${game.age}+</li>
+                <li class="game-difficulty"><img src="images/Sværhedsgrad ikon.png" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</li>
+            </ul>
+
+            <p class="game-rules">${game.rules}</p>
+            </div>
+        </article>
+    `;
+
+    // Favoritknappen inde i modalen
+    const modalFavoriteButton = dialogContent.querySelector(".favorite-btn");
+    modalFavoriteButton.addEventListener("click", () => {
+        toggleFavorite(game.id);
+        updateFavoriteButton(modalFavoriteButton, game.Id); //så opdatere favoritknappen kun
+    });
 
   // Åbn modalen og forhindre baggrunds scroll
   document.body.classList.add("modal-open");
@@ -231,5 +239,6 @@ function showGameModal(game) {
       dialog.close();
     }
   });
+
 }
 
