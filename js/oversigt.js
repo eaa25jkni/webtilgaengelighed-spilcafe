@@ -119,7 +119,31 @@ function displayGames(gameList) {
         });
 
 
+    //=========ÅBEN MODAL===========
+        //Når vi indtænker tilgængelighed er det vigtigt, at man kan åbne game-card både med musen (click) og med tasturet (tab og enter)
 
+        const gameCards = document.querySelectorAll(".game-card")
+
+        gameCards.forEach((card, index) => { //for hvert kort får funktionen de værdier: det aktuelle kort (html elementet), og index, altså den placering i listen.
+            const game = gameList[index];
+
+            //Så man kan klikke med musen
+            card.addEventListener("click", () => {
+                showGameModal(game);
+            });
+
+
+            //Så man kan bruge tab og enter eller mellemrum til at åbne modalen
+            card.addEventListener("keydown", (event) => {
+                if (event.target !==card) return; //så fokus kun gælder når det er på selve kortet og ikke når det er på favoritknappen som ligger inden i kortet.
+
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault(); //som standart ruller mellemrumtasten ned på siden, det ville vi gerne undgå når de klikker på kortet. Derfor siger vi dette
+                    showGameModal(game);
+                }
+            });
+
+        });
 }
 
 
