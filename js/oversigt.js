@@ -95,7 +95,7 @@ function displayGames(gameList) {
     return `
         <article class="game-card">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
-                <button type="button" class="favorite-btn" data-id="${game.id} aria-label="Favoritknap">
+                <button type="button" class="favorite-btn" data-id="${game.id} aria-pressed="${isFavorite(game.Id)}" aria-label="Favoritknap">
                     <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon"/>
                 </button>
                 
@@ -177,39 +177,42 @@ function displayGames(gameList) {
 
 
 // ===== MODAL =====
-
-
-
-
-
 function showGameModal(game) {
   console.log("🎭 Åbner modal for:", game.title);
 
   // Byg HTML struktur dynamisk
   const dialogContent = document.querySelector("#dialog-content");
-  const favoriteIconSrc = isFavorite(game.title)
-    ? "Images/Favorit fyldt ikon.png"
-    : "Images/Favorit tomt ikon.png";
+  const favoriteIconSrc = isFavorite(game.id)
+    ? "images/favorit-fyldt-ikon.png"
+    : "images/favorit-tomt-ikon.png";
 
   dialogContent.innerHTML = `
-   <div class="game-poster-container">
-     <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
-     <img src="${favoriteIconSrc}" alt="Favorit" class="favorite-icon" onclick="toggleFavorite(event, '${game.title}')">
-   </div>
-   <div class="dialog-game-info">
-      <h1>${game.title} </h1>
-      <h2 class="game-description">${game.description}</h2>
-      <p class="game-shelf">Hylde ${game.shelf}</p>
-      <div class="game-icons-grid">
-        <p class="game-genre"><img src="Images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</p> 
-        <p class="game-rating"><img src="Images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</p>
-        <p class="game-players"><img src="Images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</p>
-        <p class="game-playtime"><img src="Images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter </p>
-        <p class="game-age"><img src="Images/Alder ikon.png" alt="Age" class="age-icon"> ${game.age}+</p>
-        <p class="game-difficulty"><img src="Images/Sværhedsgrad ikon.png" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</p>
-      </div>
-      <p class="game-rules">${game.rules}</p>
-      </div>
+  <article class="modal-game-card">
+
+    <div class="game-poster-container">
+        <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
+        <button type="button" class="favorite-btn" data-id="${game.id} aria-pressed="${isFavorite(game.Id)}" aria-label="Favoritknap">
+                    <img src="${favoriteIconSrc}" alt="FavoritKnap" class="favorite-icon"/>
+        </button>
+    </div>
+
+    <div class="dialog-game-info">
+        <h1>${game.title} </h1>
+        <p class="game-description">${game.description}</p>
+        <p class="game-shelf">Hylde ${game.shelf}</p>
+
+        <ul class="game-icons-grid">
+            <li class="game-genre"><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
+            <li class="game-rating"><img src="images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</li>
+            <li class="game-players"><img src="images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
+            <li class="game-playtime"><img src="images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
+            <li class="game-age"><img src="images/Alder ikon.png" alt="Age" class="age-icon"> ${game.age}+</li>
+            <li class="game-difficulty"><img src="images/Sværhedsgrad ikon.png" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</li>
+        </ul>
+
+        <p class="game-rules">${game.rules}</p>
+        </div>
+      </article>
   `;
 
   // Åbn modalen og forhindre baggrunds scroll
