@@ -47,66 +47,33 @@ document.addEventListener("DOMContentLoaded", initApp);
             return favoriteIds.includes(id);
         }
 
-        //=====TOGGLE======
-        // Håndter favorit klik
-        function toggleFavorite(event, gameTitle) {
-        event.stopPropagation(); // Forhindrer at game card også bliver klikket
-        const favoriteIcon = event.target;
+        //=====FAVORIT TOGGLE FUNKTION======
 
-        // Hent eksisterende favoritter fra localStorage
-        let favorites = getFavorites();
+        //Man skal kunne toggle mellem gem favorit og fjern favorit.
 
-        // Toggle mellem tomt og fyldt hjerte
-        if (favoriteIcon.src.includes("Favorit tomt ikon.png")) {
-            favoriteIcon.src = "Images/Favorit fyldt ikon.png";
-            // Tilføj til favoritter
-            if (!favorites.includes(gameTitle)) {
-            favorites.push(gameTitle);
-            saveFavorites(favorites);
+        function toggleFavorite(id) {
+            if (favoriteIds.includes(id)) {
+                favoriteIds = favoriteIds.filter((favoriteId) => {
+                    return favoriteId !== id; //tjekker på en id, hvis det er inkluderet, så er det true, og så skal den Så fjerne id fra arrayet.
+                });
+            } else {
+                favoriteIds.push(id);  //hvis ikke id findes på listen, så er det false og den kører push, hvor den tilføjer id'et favorite id
             }
-            console.log(`❤️ Tilføjet til favoritter: ${gameTitle}`);
-        } else {
-            favoriteIcon.src = "Images/Favorit tomt ikon.png";
-            // Fjern fra favoritter
-            favorites = favorites.filter((title) => title !== gameTitle);
-            saveFavorites(favorites);
-            console.log(`💔 Fjernet fra favoritter: ${gameTitle}`);
+
+            localStorage.setItem("favoriteGames", JSON.stringify(favoriteIds)); //Vi gemmer i localstorage
+
+            displayGames(allGames); //Så kører vi listen igen, således ikonerne opdateres
         }
 
-        // Opdater alle ikoner for dette spil (både i grid og dialog)
-        updateFavoriteIcons(gameTitle, favorites.includes(gameTitle));
+        // Opdater alle ikoner og aria for et specifikt spil
+        function updateFavoriteIcons(button, id) {
+        const fav = isFavorite(id);
+            button.setAntribute("aria-pressed", fav) //tilføjer antributten aria-pressed
+            button.querySelector("img").scr = fav 
+            ? "images/favorit-fyldt-ikon.png" //hvis fav er sand, så skal hjertet være fyldt
+            : "images/favorit-tomt-ikon.png"; //hvis falsk skal hjertet være tomt
         }
-
-        // Hent favoritter fra localStorage
-        function getFavorites() {
-        const favorites = localStorage.getItem("gamesFavorites");
-        return favorites ? JSON.parse(favorites) : [];
-        }
-
-        // Gem favoritter i localStorage
-        function saveFavorites(favorites) {
-        localStorage.setItem("gamesFavorites", JSON.stringify(favorites));
-        }
-
-        // Opdater alle favorit-ikoner for et specifikt spil
-        function updateFavoriteIcons(gameTitle, isFavorite) {
-        const iconSrc = isFavorite
-            ? "Images/Favorit fyldt ikon.png"
-            : "Images/Favorit tomt ikon.png";
-
-        // Find alle ikoner for dette spil (både i grid og dialog)
-        const allIcons = document.querySelectorAll(`img[onclick*="${gameTitle}"]`);
-        allIcons.forEach((icon) => {
-            icon.src = iconSrc;
-        });
-        }
-
-        // Tjek om et spil er favorit
-        function isFavorite(gameTitle) {
-        const favorites = getFavorites();
-        return favorites.includes(gameTitle);
-        }
-
+     
 
 
 // ===== VISNING =====  
