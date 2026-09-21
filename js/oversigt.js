@@ -47,19 +47,53 @@ function isFavorite(id) {
 
 
 
-// ===== VISNING =====  // Vis alle games - loop gennem og kald displayGame() for hver game
-function displayGames(games) {
-  console.log(` Viser ${games.length} games`);
-  // Nulstil #game-list HTML'en
-  document.querySelector("#game-list").innerHTML = "";
-  // Gennemløb alle games og kør displayGame-funktionen for hver game
-  for (const game of games) {
-    displayGame(game);
-  }
-}
+// ===== VISNING =====  
 
 // Vis ÉT game card til game list
-function displayGame(game) {
+function displayGames(gameList) {
+
+    const html = gameList
+    .map((game) => {      //.map kører igennem vores games, og skal tjekke om spillet er en favorit, og dermed bliver det rigtige ikon vist.
+        let favoriteIcon
+
+        if (isFavorite(game.id)) { //hvis favorit id'et er true, så skal der vises en fyldt hjerte
+            favoriteIcon = "images/favorit-fyldt-ikon.png"
+
+        } else { //hvis ikke så skal stjernen være tom
+            favoriteIcon = "images/favorit-tomt-ikon.png"
+        }
+
+    return `
+        <article class="game-card">
+                <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
+                <button type="button" class="favorite-btn" data-id="${game.id} aria-label="Favoritknap">
+                    <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon"/>
+                </button>
+                
+            <div class="game-info">
+                <div class="game-card-overskrift">
+                    <h2>${game.title} </h2>
+                    <span class="game-rating"><img src="images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</span>
+
+                </div>
+
+                <ul>
+                    <li class="game-shelf">Hylde ${game.shelf}</li>
+                    <li class="game-players"><img src="images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
+                    <li class="game-playtime"><img src="images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
+                    <li class="game-genre"<img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                </ul>
+            </div>
+        </article>
+    
+    `;
+    }).join(""); //det samler vores html stringer som map laver til en lang html-stirng.
+    
+
+    //=========DOM-MANIPULATION==========
+    gamesContainer.innerHTML =html; //Her indsættes det i vores HTML i vores gamesContainer.
+
+
   const gameList = document.querySelector("#game-list");
   const favoriteIconSrc = isFavorite(game.title)
     ? "Images/Favorit fyldt ikon.png"
