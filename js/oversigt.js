@@ -41,9 +41,71 @@ document.addEventListener("DOMContentLoaded", initApp);
         //updateActiveFiltersDisplay(); // Initialiser aktive filtre display
     }
 
-function isFavorite(id) {
-    return favoriteIds.includes(id);
-}
+
+    //===========FAVORITTER===========
+        function isFavorite(id) {
+            return favoriteIds.includes(id);
+        }
+
+        //=====TOGGLE======
+        // Håndter favorit klik
+        function toggleFavorite(event, gameTitle) {
+        event.stopPropagation(); // Forhindrer at game card også bliver klikket
+        const favoriteIcon = event.target;
+
+        // Hent eksisterende favoritter fra localStorage
+        let favorites = getFavorites();
+
+        // Toggle mellem tomt og fyldt hjerte
+        if (favoriteIcon.src.includes("Favorit tomt ikon.png")) {
+            favoriteIcon.src = "Images/Favorit fyldt ikon.png";
+            // Tilføj til favoritter
+            if (!favorites.includes(gameTitle)) {
+            favorites.push(gameTitle);
+            saveFavorites(favorites);
+            }
+            console.log(`❤️ Tilføjet til favoritter: ${gameTitle}`);
+        } else {
+            favoriteIcon.src = "Images/Favorit tomt ikon.png";
+            // Fjern fra favoritter
+            favorites = favorites.filter((title) => title !== gameTitle);
+            saveFavorites(favorites);
+            console.log(`💔 Fjernet fra favoritter: ${gameTitle}`);
+        }
+
+        // Opdater alle ikoner for dette spil (både i grid og dialog)
+        updateFavoriteIcons(gameTitle, favorites.includes(gameTitle));
+        }
+
+        // Hent favoritter fra localStorage
+        function getFavorites() {
+        const favorites = localStorage.getItem("gamesFavorites");
+        return favorites ? JSON.parse(favorites) : [];
+        }
+
+        // Gem favoritter i localStorage
+        function saveFavorites(favorites) {
+        localStorage.setItem("gamesFavorites", JSON.stringify(favorites));
+        }
+
+        // Opdater alle favorit-ikoner for et specifikt spil
+        function updateFavoriteIcons(gameTitle, isFavorite) {
+        const iconSrc = isFavorite
+            ? "Images/Favorit fyldt ikon.png"
+            : "Images/Favorit tomt ikon.png";
+
+        // Find alle ikoner for dette spil (både i grid og dialog)
+        const allIcons = document.querySelectorAll(`img[onclick*="${gameTitle}"]`);
+        allIcons.forEach((icon) => {
+            icon.src = iconSrc;
+        });
+        }
+
+        // Tjek om et spil er favorit
+        function isFavorite(gameTitle) {
+        const favorites = getFavorites();
+        return favorites.includes(gameTitle);
+        }
 
 
 
@@ -147,92 +209,11 @@ function displayGames(gameList) {
 }
 
 
-
-
-
-  // Tilføj click event til den nye card
-  const newCard = gameList.lastElementChild;
-  newCard.addEventListener("click", function () {
-    console.log(`🎬 Klik på: "${game.title}"`);
-    showGameModal(game);
-  });
-
-  // Tilføj keyboard support
-  newCard.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      showGameModal(game);
-    }
-  });
-
-
-
-
 // ===== MODAL =====
 
-// ===== FAVORIT SYSTEM =====
 
-// Håndter favorit klik
-function toggleFavorite(event, gameTitle) {
-  event.stopPropagation(); // Forhindrer at game card også bliver klikket
-  const favoriteIcon = event.target;
 
-  // Hent eksisterende favoritter fra localStorage
-  let favorites = getFavorites();
 
-  // Toggle mellem tomt og fyldt hjerte
-  if (favoriteIcon.src.includes("Favorit tomt ikon.png")) {
-    favoriteIcon.src = "Images/Favorit fyldt ikon.png";
-    // Tilføj til favoritter
-    if (!favorites.includes(gameTitle)) {
-      favorites.push(gameTitle);
-      saveFavorites(favorites);
-    }
-    console.log(`❤️ Tilføjet til favoritter: ${gameTitle}`);
-  } else {
-    favoriteIcon.src = "Images/Favorit tomt ikon.png";
-    // Fjern fra favoritter
-    favorites = favorites.filter((title) => title !== gameTitle);
-    saveFavorites(favorites);
-    console.log(`💔 Fjernet fra favoritter: ${gameTitle}`);
-  }
-
-  // Opdater alle ikoner for dette spil (både i grid og dialog)
-  updateFavoriteIcons(gameTitle, favorites.includes(gameTitle));
-}
-
-// Hent favoritter fra localStorage
-function getFavorites() {
-  const favorites = localStorage.getItem("gamesFavorites");
-  return favorites ? JSON.parse(favorites) : [];
-}
-
-// Gem favoritter i localStorage
-function saveFavorites(favorites) {
-  localStorage.setItem("gamesFavorites", JSON.stringify(favorites));
-}
-
-// Opdater alle favorit-ikoner for et specifikt spil
-function updateFavoriteIcons(gameTitle, isFavorite) {
-  const iconSrc = isFavorite
-    ? "Images/Favorit fyldt ikon.png"
-    : "Images/Favorit tomt ikon.png";
-
-  // Find alle ikoner for dette spil (både i grid og dialog)
-  const allIcons = document.querySelectorAll(`img[onclick*="${gameTitle}"]`);
-  allIcons.forEach((icon) => {
-    icon.src = iconSrc;
-  });
-}
-
-// Tjek om et spil er favorit
-function isFavorite(gameTitle) {
-  const favorites = getFavorites();
-  return favorites.includes(gameTitle);
-}
-
-// Vis (alle) game detaljer i modal
-// Hvilke felter har et game? (Se JSON strukturen)
 
 function showGameModal(game) {
   console.log("🎭 Åbner modal for:", game.title);
