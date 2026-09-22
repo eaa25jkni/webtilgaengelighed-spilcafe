@@ -110,7 +110,7 @@ function displayGames(gameList) {
                     <li class="game-shelf">Hylde ${game.shelf}</li>
                     <li class="game-players"><img src="images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
                     <li class="game-playtime"><img src="images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-                    <li class="game-genre"></li><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                    <li class="game-genre"><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
                 </ul>
             </div>
         </article>
@@ -220,7 +220,7 @@ function displayGames(gameList) {
     const modalFavoriteButton = dialogContent.querySelector(".favorite-btn");
     modalFavoriteButton.addEventListener("click", () => {
         toggleFavorite(game.id);
-        updateFavoriteButton(modalFavoriteButton, game.Id); //så opdatere favoritknappen kun
+        updateFavoriteButton(modalFavoriteButton, game.id); //så opdatere favoritknappen kun
     });
 
   // Åbn modalen og forhindre baggrunds scroll

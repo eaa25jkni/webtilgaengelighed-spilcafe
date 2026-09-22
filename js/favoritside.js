@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", initApp);
 
         //populateGenreDropdown(); // Udfyld dropdown med genres <-----
         //LocationDropdown(); // Udfyld dropdown med locations <-----
-        displayGames(allGames);
+        displayFavorites();
         //populateCarousel(); // Tilføj top-rated games til karrussel
         //populateScrollCarousel(); // Tilføj nyere games til scroll-karrussel
         //updateActiveFiltersDisplay(); // Initialiser aktive filtre display
@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", initApp);
 
         function toggleFavorite(id) {
             if (favoriteIds.includes(id)) {
-                favoriteIds = favoriteIds.filter((favoriteId) => {
-                    favoriteId !== id; //tjekker på en id, hvis det er inkluderet, så er det true, og så skal den Så fjerne id fra arrayet.
+                 favoriteIds = favoriteIds.filter((favoriteId) => {
+                 return favoriteId !== id; //tjekker på en id, hvis det er inkluderet, så er det true, og så skal den Så fjerne id fra arrayet.
                 });
             } else {
                 favoriteIds.push(id);  //hvis ikke id findes på listen, så er det false og den kører push, hvor den tilføjer id'et favorite id
@@ -97,7 +97,7 @@ function displayFavorites() {
         <article class="game-card">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
                 <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
-                    <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon"/>
+                    <img src="images/favorit-fyldt-ikon.png" alt="FavoritKnap" class="favorite-icon"/>
                 </button>
                 
             <div class="game-info">
@@ -111,7 +111,7 @@ function displayFavorites() {
                     <li class="game-shelf">Hylde ${game.shelf}</li>
                     <li class="game-players"><img src="images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
                     <li class="game-playtime"><img src="images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-                    <li class="game-genre"></li><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                    <li class="game-genre"><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
                 </ul>
             </div>
         </article>
@@ -122,7 +122,7 @@ function displayFavorites() {
     
 
     //=========DOM-MANIPULATION==========
-    favoritesContainer.innerHTML = html; //Her indsættes det i vores HTML i vores gamesContainer.
+    favoritesContainer.innerHTML = html; //Her indsættes det i vores HTML i vores favoriteContainer.
 
     addFavoriteButtonListeners(favoriteGames);
     addCardListeners(favoriteGames);
@@ -142,15 +142,6 @@ function displayFavorites() {
                 const gameId = Number(button.dataset.id); //hvorefter den så skal hente hver id og lave det om et tal
             toggleFavorite(gameId);
 
-            //Tilgængelighed til tastaturnavigation
-            //Når der klikkes på en favoritknap gentegnes hele listen, så for at sørge for at brugeren starter samme sted som før med tab, altså at de ikke mister deres position:
-            const sameButton = gamesContainer.querySelector (
-                `.favorite-btn[data-id="${gameId}"]`     //vi finder samme favoritknap, og gemmer den i const sameButton
-            );
-            if (sameButton) {
-                sameButton.focus(); //gør den valgte favorit knap aktiv igen
-            }
-
             });
         });
     }
@@ -159,7 +150,8 @@ function displayFavorites() {
     //=========ÅBEN MODAL===========
         //Når vi indtænker tilgængelighed er det vigtigt, at man kan åbne game-card både med musen (click) og med tasturet (tab og enter)
 
-        const gameCards = document.querySelectorAll(".game-card")
+        function addCardListeners(gameList) {
+        const gameCards = favoritesContainer.querySelectorAll(".game-card")
 
         gameCards.forEach((card, index) => { //for hvert kort får funktionen de værdier: det aktuelle kort (html elementet), og index, altså den placering i listen.
             const game = gameList[index];
@@ -181,7 +173,7 @@ function displayFavorites() {
             });
 
         });
-
+    }
 
 
 // ===== MODAL =====
@@ -226,8 +218,10 @@ function displayFavorites() {
     // Favoritknappen inde i modalen
     const modalFavoriteButton = dialogContent.querySelector(".favorite-btn");
     modalFavoriteButton.addEventListener("click", () => {
+        const dialog = document.querySelector("#game-dialog");
         toggleFavorite(game.id);
-        updateFavoriteButton(modalFavoriteButton, game.Id); //så opdatere favoritknappen kun
+        updateFavoriteButton(modalFavoriteButton, game.id); //så opdatere favoritknappen kun
+        dialog.close();
     });
 
   // Åbn modalen og forhindre baggrunds scroll
