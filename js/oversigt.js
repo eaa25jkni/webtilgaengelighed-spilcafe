@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", initApp);
         function updateFavoriteButton(button, id) {
         const fav = isFavorite(id);
             button.setAttribute("aria-pressed", fav) //tilføjer antributten aria-pressed
-            button.querySelector("img").scr = fav 
+            button.querySelector("img").src = fav 
             ? "images/favorit-fyldt-ikon.png" //hvis fav er sand, så skal hjertet være fyldt
             : "images/favorit-tomt-ikon.png"; //hvis falsk skal hjertet være tomt
         }
