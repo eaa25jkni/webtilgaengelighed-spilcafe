@@ -32,26 +32,10 @@ document.addEventListener("DOMContentLoaded", initApp);
   document.querySelector("#main-sort-select").addEventListener("change", filterGames);
     
 
-  // ===== SPILLETID RANGE FILTRERING =====
-  // "Fra" spilletid felt - auto-udfyldning af "til" felt
-  document.querySelector("#header-playtime-from").addEventListener("input", function () {
-    const fromValue = this.value; // Hent den indtastede "fra" værdi
-    const toField = document.querySelector("#header-playtime-to"); // Find "til" feltet
-
-  // AUTOMATISK BEREGNING: Hver gang "Fra" ændres, sæt "Til" til +15 minutter
-  // Eksempel: Fra=30 → Til=45, Fra=60 → Til=75
-      if (fromValue) {
-        toField.value = parseInt(fromValue) + 15; // Konverterer til tal og læg 15 til
-      } else {
-        // Hvis "Fra" ryddes (tomt), ryd også "Til" for at nulstille filteret
-        toField.value = "";
-      }
-
-      filterGames(); // Kører ny filtrering med opdaterede værdier
-    });
-
-  // "Til" spilletid felt - manuel justering af spilletid range
-  document.querySelector("#header-playtime-to").addEventListener("input", filterGames);
+  // ===== SPILLETID  FILTRERING =====
+  document.querySelector("#header-playtime-select")
+  .addEventListener("change", filterGames);
+  
 
   // ===== RATING FELTER - AVANCERET SYNKRONISERING =====
   // Rating "Fra" felt - tillader bruger fleksibilitet men sikrer logiske værdier
@@ -209,12 +193,9 @@ function initFilterPanel() {
 
     // Check number inputs - men spilletid tæller kun som én filtrering
     // Spilletid (tæller kun som ét filter hvis mindst et af felterne er udfyldt)
-    if (
-      document.querySelector("#header-playtime-from").value ||
-      document.querySelector("#header-playtime-to").value
-    ) {
-      activeFilters++;
-    }
+    if (document.querySelector("#header-playtime-select").value !== "all") {
+  activeFilters++;
+}
 
     // Rating (tæller kun som ét filter hvis mindst et af felterne er udfyldt)
     if (
@@ -241,8 +222,7 @@ function initFilterPanel() {
     "#header-genre-select",
     "#header-sort-select",
     "#main-sort-select",
-    "#header-playtime-from",
-    "#header-playtime-to",
+    "#header-playtime-select",
     "#header-rating-from",
     "#header-rating-to",
     "#header-players-from",
@@ -554,20 +534,6 @@ function filterGames() {
   // Location variable - fra header
   const locationValue = document.querySelector("#location-select").value;
 
-  // Playtime variable - fra header
-  const playtimeFromInput = document.querySelector(
-    "#header-playtime-from"
-  ).value;
-  const playtimeToInput = document.querySelector("#header-playtime-to").value;
-
-  const playtimeFrom = Number(playtimeFromInput) || 0;
-  // Hvis kun "Fra" er udfyldt, sæt automatisk "Til" til +15 min
-  let playtimeTo;
-  if (playtimeFromInput && !playtimeToInput) {
-    playtimeTo = Number(playtimeFromInput) + 15;
-  } else {
-    playtimeTo = Number(playtimeToInput) || 9999;
-  }
 
   // Rating variable - fra header
   const ratingFromInput = document.querySelector("#header-rating-from").value;
@@ -614,13 +580,17 @@ function filterGames() {
   }
 
   // TRIN 4: Playtime filter
-  if (playtimeFrom > 0 || playtimeTo < 9999) {
-    filteredGames = filteredGames.filter((game) => {
-      // Antag at game.playtime er i minutter (f.eks. "30-60" eller "45")
-      const playtime = parseInt(game.playtime); // Tag første nummer
-      return playtime >= playtimeFrom && playtime <= playtimeTo;
-    });
-  }
+  const playtimeValue = document.querySelector("#header-playtime-select").value;
+
+if (playtimeValue !== "all") {
+
+  const [minPlaytime, maxPlaytime] = playtimeValue.split("-").map(Number);   // Splitter f.eks. "30-60" op i minPlaytime = 30 og maxPlaytime = 60
+
+  filteredGames = filteredGames.filter((game) => {
+    const playtime = parseInt(game.playtime); // Henter tal fra game.playtime og lavet det til et interval
+    return playtime >= minPlaytime && playtime <= maxPlaytime;
+  });
+}
 
   // TRIN 5: Rating filter
   if (ratingFromInput || ratingToInput) {
@@ -740,23 +710,15 @@ function getActiveFilters() {
   }
 
   // Spilletid
-  const playtimeFrom = document.querySelector("#header-playtime-from").value;
-  const playtimeTo = document.querySelector("#header-playtime-to").value;
-  if (playtimeFrom || playtimeTo) {
-    const fromText = playtimeFrom || "0";
-    // Hvis kun "Fra" er udfyldt, tilføj automatisk +15 min til "Til"
-    let toText;
-    if (playtimeFrom && !playtimeTo) {
-      toText = (parseInt(playtimeFrom) + 15).toString();
-    } else {
-      toText = playtimeTo || "∞";
-    }
-    filters.push({
-      type: "playtime",
-      label: `Spilletid: ${fromText}-${toText} min`,
-      value: { from: playtimeFrom, to: playtimeTo },
-    });
-  }
+  const playtimeSelect = document.querySelector("#header-playtime-select");
+if (playtimeSelect.value !== "all") {
+  const selectedText = playtimeSelect.options[playtimeSelect.selectedIndex].text;
+  filters.push({
+    type: "playtime",
+    label: `Spilletid: ${selectedText}`,
+    value: playtimeSelect.value,
+  });
+}
 
   // Rating
   const ratingFrom = document.querySelector("#header-rating-from").value;
@@ -835,9 +797,8 @@ function removeFilter(filter) {
       document.querySelector("#main-sort-select").value = "all";
       break;
     case "playtime":
-      document.querySelector("#header-playtime-from").value = "";
-      document.querySelector("#header-playtime-to").value = "";
-      break;
+  document.querySelector("#header-playtime-select").value = "all";
+  break;
     case "rating":
       document.querySelector("#header-rating-from").value = "";
       document.querySelector("#header-rating-to").value = "";
@@ -872,13 +833,13 @@ function clearAllFilters() {
   document.querySelector("#location-select").value = "all";
   document.querySelector("#header-sort-select").value = "all";
   document.querySelector("#header-difficulty-select").value = "none";
+  document.querySelector("#header-playtime-select").value = "all";
 
   // Ryd main sort dropdown
   document.querySelector("#main-sort-select").value = "all";
 
   // Ryd de nye range felter - header version
-  document.querySelector("#header-playtime-from").value = "";
-  document.querySelector("#header-playtime-to").value = "";
+  
   document.querySelector("#header-rating-from").value = "";
   document.querySelector("#header-rating-to").value = "";
   document.querySelector("#header-players-from").value = "";
