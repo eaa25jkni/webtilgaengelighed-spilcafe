@@ -73,6 +73,9 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   font-family: poppins-medium, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
@@ -87,9 +90,12 @@ body {
 /* Prevent background scroll when modal is open */
 
 main {
-  max-width: min(1400px, 95vw);
+  display: flex;
+  flex-direction: column;
+  width: 101%;;
   margin: 0 auto;
-  padding: clamp(5rem, 10vw, 8rem) 1rem 6rem; /* Extra padding bottom for bottom nav */
+  padding-bottom: 5rem;
+   
 }
 
 body.modal-open {
@@ -103,7 +109,7 @@ span {
 h1 {
   font-family: poppins-bold, sans-serif;
   font-size: 36px;
-margin-top: 30px;
+
   color: var(--text);
 }
 
@@ -480,15 +486,17 @@ p {
    ============================= */
 
   header {
+    display: flex;
   background: #FAFAFA;
   backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(172, 198, 201, 0.2);
   color: var(--text);
+  max-height: 6em;
   padding: 1rem 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -743,13 +751,27 @@ p {
 }
 
 
+/* ==================================
+   HERO SEKTION - spiloversigt
+   ================================ */
 
-/* (main er allerede defineret ovenfor - dublet fjernet) */
+   #hero-spiloversigt {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff3f1;
+    background-image: url('../images/baggrund-kodning.svg');
+    
+    background-position: center;
+    padding: 5em 8em;
+    
+   }
+
+
 
 /* =====================
    GAME GRID & CARDS
    ===================== */
-/* TODO !!! */
+
 
   .game-card {
     display: flex;
@@ -1221,7 +1243,9 @@ dialog#game-dialog::backdrop {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  padding: 1rem;
+  margin: auto;
+ 
+  padding: 10em 8rem;
 } 
 
 /* Tablet - 2 kolonner */
@@ -1430,7 +1454,8 @@ dialog#game-dialog::backdrop {
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 2rem;
-  padding: 0 1rem;
+  padding: 1em 8rem;
+  margin: auto;
 }
 
 .sort-controls {
