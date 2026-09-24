@@ -37,60 +37,7 @@ document.addEventListener("DOMContentLoaded", initApp);
   .addEventListener("change", filterGames);
   
 
-  // ===== RATING FELTER - AVANCERET SYNKRONISERING =====
-  // Rating "Fra" felt - tillader bruger fleksibilitet men sikrer logiske værdier
-  document.querySelector("#header-rating-from").addEventListener("input", function () {
-    const fromValue = parseInt(this.value); // Konverter til tal (NaN(Not a number) hvis tomt)
-    const toField = document.querySelector("#header-rating-to");
-    const toValue = parseInt(toField.value); // Hent nuværende "Til" værdi
-
-  // SCENARIE 1: Bruger ændrer "Fra" og "Til" bliver for lav
-  // Eksempel: Fra=2→5, Til=3 → Fra=5, Til=5 (auto-justering)
-    if (fromValue && toValue && toValue < fromValue) {
-        toField.value = fromValue; // Løft "Til" til samme niveau som "Fra"
-        console.log(
-          `📊 Rating auto-justering: Til løftet fra ${toValue} til ${fromValue}`
-        );
-      }
-      // SCENARIE 2: Første gang "Fra" udfyldes (smart initialisering)
-      // Eksempel: Fra=tom→3, Til=tom → Fra=3, Til=4 (+1 for god range)
-      else if (fromValue && !toField.value) {
-        toField.value = Math.min(5, fromValue + 1); // +1 men aldrig over max 5
-        console.log(
-          `📊 Rating initialisering: Fra=${fromValue}, Til=${toField.value}`
-        );
-      }
-
-      filterGames(); // Kør filtrering med nye værdier
-    });
-
-  // Rating "Til" felt - validerer at "Fra" ≤ "Til" reglen overholdes
-  document
-    .querySelector("#header-rating-to")
-    .addEventListener("input", function () {
-      const toValue = parseInt(this.value); // Konverter til tal (NaN(Not a number) hvis tomt)
-      const fromField = document.querySelector("#header-rating-from");
-      const fromValue = parseInt(fromField.value); // Hent nuværende "Fra" værdi
-
-      // SCENARIE 1: Bruger sætter "Til" lavere end "Fra" (ulovligt)
-      // Eksempel: Fra=4, Til=5→2 → Fra=2, Til=2 (auto-justering)
-      if (toValue && fromValue && toValue < fromValue) {
-        fromField.value = toValue; // Sænk "Fra" til samme niveau som "Til"
-        console.log(
-          `📊 Rating validering: Fra sænket fra ${fromValue} til ${toValue}`
-        );
-      }
-      // SCENARIE 2: Første gang "Til" udfyldes (smart initialisering)
-      // Eksempel: Fra=tom, Til=tom→4 → Fra=2, Til=4 (2-punkts range)
-      else if (toValue && !fromField.value) {
-        fromField.value = Math.max(0, toValue - 2); // -2 for god range, men aldrig under 0
-        console.log(
-          `📊 Rating initialisering: Fra=${fromField.value}, Til=${toValue}`
-        );
-      }
-
-      filterGames(); // Kør filtrering med nye værdier
-    });
+  
 
   // Spillere felt
   document
@@ -197,13 +144,7 @@ function initFilterPanel() {
   activeFilters++;
 }
 
-    // Rating (tæller kun som ét filter hvis mindst et af felterne er udfyldt)
-    if (
-      document.querySelector("#header-rating-from").value ||
-      document.querySelector("#header-rating-to").value
-    ) {
-      activeFilters++;
-    }
+    
 
     // Øvrige enkelt-felter
     if (document.querySelector("#header-players-from").value) activeFilters++;
@@ -223,8 +164,7 @@ function initFilterPanel() {
     "#header-sort-select",
     "#main-sort-select",
     "#header-playtime-select",
-    "#header-rating-from",
-    "#header-rating-to",
+    
     "#header-players-from",
     "#header-difficulty-select",
     "#header-age-from",
@@ -535,11 +475,6 @@ function filterGames() {
   const locationValue = document.querySelector("#location-select").value;
 
 
-  // Rating variable - fra header
-  const ratingFromInput = document.querySelector("#header-rating-from").value;
-  const ratingToInput = document.querySelector("#header-rating-to").value;
-  const ratingFrom = Number(ratingFromInput) || 0;
-  const ratingTo = Number(ratingToInput) || 5;
 
   // Antal spillere variable - fra header
   const playersFrom =
@@ -592,12 +527,7 @@ if (playtimeValue !== "all") {
   });
 }
 
-  // TRIN 5: Rating filter
-  if (ratingFromInput || ratingToInput) {
-    filteredGames = filteredGames.filter((game) => {
-      return game.rating >= ratingFrom && game.rating <= ratingTo;
-    });
-  }
+  
 
   // TRIN 6: Antal spillere filter
   if (playersFrom > 0) {
@@ -720,18 +650,7 @@ if (playtimeSelect.value !== "all") {
   });
 }
 
-  // Rating
-  const ratingFrom = document.querySelector("#header-rating-from").value;
-  const ratingTo = document.querySelector("#header-rating-to").value;
-  if (ratingFrom || ratingTo) {
-    const fromText = ratingFrom || "0";
-    const toText = ratingTo || "5";
-    filters.push({
-      type: "rating",
-      label: `Rating: ${fromText}-${toText}`,
-      value: { from: ratingFrom, to: ratingTo },
-    });
-  }
+  
 
   // Antal spillere
   const playersFrom = document.querySelector("#header-players-from").value;
@@ -799,10 +718,7 @@ function removeFilter(filter) {
     case "playtime":
   document.querySelector("#header-playtime-select").value = "all";
   break;
-    case "rating":
-      document.querySelector("#header-rating-from").value = "";
-      document.querySelector("#header-rating-to").value = "";
-      break;
+    
     case "players":
       document.querySelector("#header-players-from").value = "";
       break;
@@ -840,8 +756,7 @@ function clearAllFilters() {
 
   // Ryd de nye range felter - header version
   
-  document.querySelector("#header-rating-from").value = "";
-  document.querySelector("#header-rating-to").value = "";
+  
   document.querySelector("#header-players-from").value = "";
   document.querySelector("#header-age-from").value = "";
 

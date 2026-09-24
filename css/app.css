@@ -397,34 +397,6 @@ p {
   border-color: var(--secondary);
 }
 
-/* Rating filter styling */
-.rating-filter {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.rating-filter label {
-  font-size: 0.875rem;
-  color: var(--text-light);
-  white-space: nowrap;
-}
-
-.rating-filter input {
-  width: 80px;
-  background: var(--bg-card);
-  color: var(--text-light);
-  border: 1px solid var(--secondary);
-  border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
-}
-
-.rating-filter input:focus {
-  outline: 2px solid var(--secondary);
-  border-color: var(--secondary);
-}
 
 /* Ryd-knap styling */
 
