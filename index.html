@@ -6,6 +6,8 @@
     <title>Spiloversigt | Spilcaféen</title>
     <link rel="icon" type="image/x-icon" href="/images/Logo spilcafeen.png">
 
+    
+
     <link rel="stylesheet" href="css/app.css" />
   </head>
 
@@ -178,6 +180,19 @@
         <h1>Spiloversigt</h1>
         <p>Gå på opdagelse i spilhylderne - Søg direkte efter dine personlige favoritter, eller filtrér på spillerantal, varighed og café for at opdage dit næste eventyr</p>
 
+      </section>
+
+      <section>
+        <search class="header-search">
+          <label for="header-search-input" class="gem">Søg spil efter titel</label>
+          <input
+            type="search"
+            id="header-search-input"
+            placeholder="Søg spil... (fx. Skak, Uno)"
+          />
+        </search>
+
+        <p id="search-results" class="gem" aria-live="polite"></p>
       </section>
 
       <section>

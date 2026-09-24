@@ -359,6 +359,8 @@ p {
   opacity: 1;
 }
 
+
+
 #genre-select,
 #sort-select {
   min-width: 160px;
@@ -545,9 +547,9 @@ p {
   justify-self: end;
 }
 
-.header-search {
+/* .header-search {
   position: relative;
-}
+} */
 
 .header-search input {
   padding: 0.75rem 1rem;
