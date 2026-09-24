@@ -106,16 +106,16 @@ span {
     color: var(--text-light);
 }
 
-h1 {
+h2 {
   font-family: poppins-bold, sans-serif;
-  font-size: 36px;
+  font-size: 32px;
 
   color: var(--text);
 }
 
-h2 {
+h3 {
   font-family: poppins-semibold, sans-serif;
-  font-size: 20px;
+  font-size: 24px;
   color: var(--text);
   line-height: 1.2;
 }
@@ -822,7 +822,7 @@ p {
     padding: 1.5rem;
   }
 
-  .game-info h2 {
+  .game-info h3 {
     color: var(--text);
     display: flex;
     align-items: flex-start;

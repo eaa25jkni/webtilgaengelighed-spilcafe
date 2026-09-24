@@ -259,12 +259,12 @@ function displayGames(gameList) {
         <article class="game-card" tabindex="0">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
                 <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
-                    <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon"/>
+                    <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon" />
                 </button>
                 
             <div class="game-info">
                 <div class="game-card-overskrift">
-                    <h2>${game.title} </h2>
+                    <h3>${game.title} </h3>
                     <div class="game-rating">
                         <img src="images/rating-ikon.png" alt="Rating" class="rating-icon">${game.rating}
                     </div>  
