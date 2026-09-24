@@ -731,6 +731,14 @@ function clearAllFilters() {
   filterGames();
 }
 
+
+
+
+
+
+
+
+
 // ===== MODAL =====
 
 // ===== FAVORIT SYSTEM =====
