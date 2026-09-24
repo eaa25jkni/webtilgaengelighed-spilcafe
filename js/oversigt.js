@@ -571,6 +571,9 @@ function updateActiveFiltersDisplay() {
   const filtersSection = document.querySelector("#active-filters-section");
   const filtersList = document.querySelector("#active-filters-list");
 
+  const gamesTitle = document.querySelector("#games-title");
+  gamesTitle.textContent = activeFilters.length > 0 ? "Resultater" : "Alle spil";
+
   if (activeFilters.length === 0) {
     filtersSection.style.display = "none";
     return;

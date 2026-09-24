@@ -132,7 +132,7 @@ p {
    ======================= */
 
 .active-filters-section {
-  padding: 0 1rem 1rem;
+  padding: 1em 8rem;
   margin-top: -1rem; /* Close spacing to games header */
 }
 
@@ -519,18 +519,18 @@ p {
   justify-self: end;
 }
 
-/* .header-search {
-  position: relative;
-} */
+
 
 .header-search input {
+  display: flex;
+  flex-direction: column;
   padding: 0.75rem 1rem;
   border: 1px solid var(--secondary);
   border-radius: var(--radius);
   background: var(--bg);
   color: var(--text);
   font-size: 1rem;
-  width: 300px;
+  width: 50em;
   transition: var(--transition);
 }
 
@@ -549,6 +549,7 @@ p {
 
 /* Filtrering toggle button */
 .filter-toggle {
+  height: 4em;
   position: relative;
   background: var(--bg);
   border: 1px solid var(--secondary);
@@ -630,6 +631,21 @@ p {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.filter-sektion {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1em 8rem;
+
+
+
+  align-items: last baseline;
+
+  gap: 1em;
+
 }
 
 .filter-panel h3 {
@@ -798,6 +814,8 @@ p {
   .game-card:hover .game-poster {
     transform: scale(1.0);
   }
+
+  
 
   .game-info {
     
