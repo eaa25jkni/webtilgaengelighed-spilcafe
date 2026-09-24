@@ -767,7 +767,7 @@ p {
   border-color: var(--secondary);
 }
 
-.game-card:focus {
+.game-card:focus-visible {
   outline: 3px solid var(--secondary);
   outline-offset: 2px;
 }
@@ -780,7 +780,7 @@ p {
 }
 
 .game-card:hover .game-poster {
-  transform: scale(1.05);
+  transform: scale(1.0);
 }
 
 .game-info {
@@ -845,17 +845,21 @@ p {
 }
 
 /* Favorite icon positioning */
-.favorite-icon {
+.favorite-btn {
   position: absolute;
   top: 10px;
   right: 10px;
   width: 32px;
   height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   cursor: pointer;
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
-  padding: 6px;
   transition: transform 0.2s ease, background 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
@@ -864,16 +868,27 @@ p {
   min-height: 44px;
 }
 
-.favorite-icon:hover {
+.favorite-btn:hover {
   transform: scale(1.1);
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+.favorite-btn:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+}
+
 /* Active state for mobile touch feedback */
-.favorite-icon:active {
+.favorite-btn:active {
   transform: scale(0.95);
   background: rgba(240, 240, 240, 1);
+}
+
+.favorite-icon {
+  width: 2.5em;
+  pointer-events: none;
+  
 }
 
 /* =====================
@@ -1006,7 +1021,7 @@ dialog#game-dialog::backdrop {
 
 /* Styling af hjerte ikon på detaljeside - samme styling som game cards */
 
-#dialog-content .favorite-icon {
+#dialog-content .favorite-btn {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -1025,14 +1040,14 @@ dialog#game-dialog::backdrop {
   min-height: 44px;
 }
 
-.favorite-icon:hover {
+.favorite-btn:hover {
   transform: scale(1.1);
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Active state for mobile touch feedback */
-.favorite-icon:active {
+.favorite-btn:active {
   transform: scale(0.95);
   background: rgba(240, 240, 240, 1);
 }

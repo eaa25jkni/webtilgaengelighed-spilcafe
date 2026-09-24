@@ -93,7 +93,7 @@ function displayGames(gameList) {
         }
 
     return `
-        <article class="game-card">
+        <article class="game-card" tabindex="0">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
                 <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
                     <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon"/>
