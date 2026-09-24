@@ -102,15 +102,17 @@ function displayGames(gameList) {
             <div class="game-info">
                 <div class="game-card-overskrift">
                     <h2>${game.title} </h2>
-                    <span class="game-rating"><img src="images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</span>
+                    <div class="game-rating">
+                        <img src="images/rating-ikon.png" alt="Rating" class="rating-icon">${game.rating}
+                    </div>  
 
                 </div>
 
                 <ul>
                     <li class="game-shelf">Hylde ${game.shelf}</li>
-                    <li class="game-players"><img src="images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
-                    <li class="game-playtime"><img src="images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-                    <li class="game-genre"><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                    <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
+                    <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
+                    <li class="game-genre"><img src="images/genre-ikon.svg" alt="Genre" class="genre-icon"> ${game.genre}</li>
                 </ul>
             </div>
         </article>
@@ -203,12 +205,12 @@ function displayGames(gameList) {
             <p class="game-shelf">Hylde ${game.shelf}</p>
 
             <ul class="game-icons-grid">
-                <li class="game-genre"><img src="images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</li>
-                <li class="game-rating"><img src="images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</li>
-                <li class="game-players"><img src="images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
-                <li class="game-playtime"><img src="images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-                <li class="game-age"><img src="images/Alder ikon.png" alt="Age" class="age-icon"> ${game.age}+</li>
-                <li class="game-difficulty"><img src="images/Sværhedsgrad ikon.png" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</li>
+                <li class="game-genre"><img src="images/genre-ikon.svg" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                <li class="game-rating"><img src="images/rating-ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</li>
+                <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
+                <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
+                <li class="game-age"><img src="images/alder-ikon.svg" alt="Age" class="age-icon"> ${game.age}+</li>
+                <li class="game-difficulty"><img src="images/grad-ikon.svg" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</li>
             </ul>
 
             <p class="game-rules">${game.rules}</p>
