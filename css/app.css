@@ -126,6 +126,10 @@ p {
     color: var(--text);
 }
 
+ul {
+  list-style-type: none;
+}
+
 
 /* =======================
    ACTIVE FILTERS DISPLAY
@@ -944,6 +948,17 @@ p {
 /* =====================
    GAME DIALOG
    ===================== */
+
+   .modal-game-card {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: top;
+
+   }
+
+
+
 dialog#game-dialog {
   border: none;
   border-radius: var(--radius);
@@ -991,7 +1006,7 @@ dialog#game-dialog::backdrop {
 }
 
 #dialog-content {
-  padding: 2rem;
+  padding: 3rem;
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
@@ -1010,8 +1025,8 @@ dialog#game-dialog::backdrop {
 #dialog-content img.game-poster {
   width: auto;
   height: auto;
-  max-height: 500px;
-  max-width: 400px;
+  max-height: 400px;
+  max-width: 350px;
   object-fit: cover;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -1024,6 +1039,13 @@ dialog#game-dialog::backdrop {
   line-height: 1.5;
 }
 
+.dialog-game-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 30em;
+}
+
+
 .dialog-game-info .game-shelf {
  color: var(--text-light); 
  border: 2px solid var(--primary);
@@ -1032,6 +1054,7 @@ dialog#game-dialog::backdrop {
  border-radius: 25px;
  margin-bottom: 20px;
  margin-top: 30px;
+ 
 }
 
 #dialog-content .game-rules {
@@ -1224,6 +1247,7 @@ dialog#game-dialog::backdrop {
     height: auto;
   }
   #dialog-content .game-icons-grid {
+    column-gap: 2rem;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto auto;
     max-width: 90%; /* Samme bredde som game-rules på mobile også */
