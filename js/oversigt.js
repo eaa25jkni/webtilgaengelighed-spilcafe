@@ -108,7 +108,7 @@ function displayGames(gameList) {
 
                 </div>
 
-                <ul>
+                <ul class="info-liste">
                     <li class="game-shelf">Hylde ${game.shelf}</li>
                     <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
                     <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>

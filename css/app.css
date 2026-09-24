@@ -751,98 +751,117 @@ p {
    ===================== */
 /* TODO !!! */
 
-.game-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  transition: var(--transition);
-  cursor: pointer;
-  position: relative;
-}
+  .game-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    
+  }
 
-.game-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--secondary);
-}
+  .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary);
+  }
 
-.game-card:focus-visible {
-  outline: 3px solid var(--secondary);
-  outline-offset: 2px;
-}
+  .game-card:focus-visible {
+    outline: 3px solid var(--secondary);
+    outline-offset: 2px;
+  }
 
-.game-poster {
-  width: 100%;
-  height: 400px;
-  object-fit: contain;
-  transition: var(--transition);
-}
+  .game-poster {
+    width: 100%;
+    max-height: 15em;
+    object-fit: contain;
+    transition: var(--transition);
+  }
 
-.game-card:hover .game-poster {
-  transform: scale(1.0);
-}
+  .game-card:hover .game-poster {
+    transform: scale(1.0);
+  }
 
-.game-info {
-  padding: 1.5rem;
-}
+  .game-info {
+    
+    padding: 1.5rem;
+  }
 
-.game-info h2 {
-  color: var(--text);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
+  .game-info h2 {
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 
-.game-genre {
-  color: var(--text-light);
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-}
+  .game-card-overskrift {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-.game-rating {
-  color: var(--text);
-  margin-bottom: 0.5rem;
-  display: flex;
+  }
+
+  .info-liste {
+    list-style-type: none;
+  }
+
+  .game-genre {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .game-rating {
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .rating-icon {
+    width: 25px;
+  }
+
+  .game-shelf {
+  color: var(--text-light); 
+  border: 2px solid var(--primary); /* Tykkelse, tekst og farve */
+  padding: 5px 30px; /* Afstand mellem tekst og kant */
+  display: inline-block; /* Så kanten passer præcist til teksten */
+  border-radius: 25px;
+  margin-bottom: 20px;
   align-items: center;
-  gap: 0.25rem;
-}
+  justify-content: center;
+  }
 
-.game-shelf {
- color: var(--text-light); 
- border: 2px solid var(--primary); /* Tykkelse, tekst og farve */
- padding: 5px 30px; /* Afstand mellem tekst og kant */
- display: inline-block; /* Så kanten passer præcist til teksten */
- border-radius: 25px;
- margin-bottom: 20px;
-}
-.rating-icon {
-  width: 25px;
-}
 
-/* Icon styling game cards (og detaljeside)*/
-.players-icon,
-.playtime-icon,
-.genre-icon,
-.age-icon, /* Detaljeside alders ikon */
-.difficulty-icon /* Detaljeside sværhedsgrad ikon */
-{
-  width: 25px;
-  margin-right: 10px;
-}
+  /* Icon styling game cards (og detaljeside)*/
+  .players-icon,
+  .playtime-icon,
+  .genre-icon,
+  .age-icon, /* Detaljeside alders ikon */
+  .difficulty-icon /* Detaljeside sværhedsgrad ikon */
+  {
+    width: 25px;
+    margin-right: 10px;
+  }
 
-/* Align game info items with icons */
-.game-players,
-.game-playtime,
-.game-genre {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  color: var(--text-light);
-  font-size: 0.9rem;
-}
+  /* Align game info items with icons */
+  .game-players,
+  .game-playtime,
+  .game-genre {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
 
 /* Favorite icon positioning */
 .favorite-btn {
