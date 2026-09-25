@@ -484,7 +484,9 @@ ul {
 }
 
 .logo {
-  height: 80px;
+  max-height: 5em;
+  width: 100%;
+  max-width: 5em;
   margin-left: 1rem;
   justify-self: start;
 }
@@ -817,6 +819,7 @@ ul {
 
   .game-poster {
     width: 100%;
+    aspect-ratio: 3/4;
     max-height: 15em;
     object-fit: contain;
     transition: var(--transition);
@@ -868,7 +871,9 @@ ul {
   }
 
   .rating-icon {
-    width: 25px;
+    width: 2em;
+    height: 2em;
+    
   }
 
   .game-shelf {
@@ -891,6 +896,7 @@ ul {
   .difficulty-icon /* Detaljeside sværhedsgrad ikon */
   {
     width: 25px;
+    height: 25px;
     margin-right: 10px;
   }
 
@@ -948,6 +954,8 @@ ul {
 
 .favorite-icon {
   width: 2.5em;
+  height: 2.5em;
+  
   pointer-events: none;
   
 }

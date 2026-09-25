@@ -245,7 +245,7 @@ function initFilterPanel() {
 function displayGames(gameList) {
 
     const html = gameList
-    .map((game) => {      //.map kører igennem vores games, og skal tjekke om spillet er en favorit, og dermed bliver det rigtige ikon vist.
+    .map((game, index) => {      //.map kører igennem vores games, og skal tjekke om spillet er en favorit, og dermed bliver det rigtige ikon vist. Parameteren index bliver index'et for det gældene kort puttet ind.
         let favoriteIcon
 
         if (isFavorite(game.id)) { //hvis favorit id'et er true, så skal der vises en fyldt hjerte
@@ -255,9 +255,11 @@ function displayGames(gameList) {
             favoriteIcon = "images/favorit-tomt-ikon.png"
         }
 
+        const loadingOptimize = index < 4 ? "eager" : "lazy";   //De fire første kort bliver vist above the fold, så de skal ik have lazy loading på. Derfor opstiller vi en betingelse, hvor hvis index er under fire skal loading"eager" på eller skal lazy på.
+
     return `
         <article class="game-card" tabindex="0">
-                <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
+                <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" loading="${loadingOptimize}"/>
                 <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
                     <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon" />
                 </button>
