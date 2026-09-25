@@ -13,21 +13,52 @@
 
   <body>
     <header>
-      <a href="index.html">
+
+      <!--logo-->
+      <a href="index.html" aria-label="Gå til forside">
         <img
           src="images/logo.png"
-          alt="Games App Logo"
+          alt="Spilcafelogo"
           class="logo"
         />
       </a>
 
-      <nav class="main-nav" aria-label="Hovedmenu">
+      <!--main navigation-->
+      <nav class="main-nav" id="main-navigation" aria-label="Hovedmenu">
         <ul class="nav-list">
           <li><a href="">Forside</a></li>
           <li><a href="/index.html" aria-current="page">Spiloversigt</a></li>
           <li><a href="">Om SpilCaféen</a></li>
         </ul>
       </nav>
+
+
+      <div class="header-right">
+
+        <!--favorit-->
+        <a href="/favoritside.html" class="favoritelist-link" aria-label="Gå til din favoritliste">
+          <img src="/images/hjerte.svg" alt="">
+        </a>
+
+
+        <!--book bord-->
+        <a href="" class="book-bord-button">
+          Book bord
+        </a>
+
+        <button class="burgermenu" type="button" aria-label="Åbn menu" aria-controls="main-navigation" aria-expanded="false"> <!--Vi sætter aria-expanded="false", så skærmlæsere kan fortælle om den er åben eller lukekt.-->
+          <img src="images/burgermenu.svg">
+
+          <span></span>
+          <span></span>
+          <span></span>
+          
+        </button>
+
+      </div>
+      
+
+    
 
 
 
