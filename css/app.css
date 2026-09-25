@@ -809,6 +809,35 @@ ul {
   animation: slideDown 0.2s ease;
 }
 
+.filter-panel-content {
+  position: relative;
+}
+
+.filter-panel-close {
+  position: absolute;
+  top: 0em;
+  right: 0em;
+  width: 1em;
+  height: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  padding: 0.8em;
+  
+  border-radius: 100px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.filter-panel-close:hover {
+  background-color: var(--error);
+  color: var(--primary-light);
+}
+
+
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -819,6 +848,7 @@ ul {
     transform: translateY(0);
   }
 }
+
 
 
   .filter-panel h2 {
