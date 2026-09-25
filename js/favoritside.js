@@ -20,6 +20,22 @@ document.addEventListener("DOMContentLoaded", initApp);
     }
   
 
+    /*======================
+        Burger menu
+========================= */
+
+    const burgermenu = document.querySelector(".burgermenu");
+    const navigation = document.querySelector(".main-nav");
+
+    burgermenu.addEventListener("click", () => {
+        const menuOpen = burgermenu.getAttribute("aria-expanded") === "true";
+
+        burgermenu.setAttribute("aria-expanded", !menuOpen); /*Så ved systemet og skærmlæseren at burgermenuen er åben eller lukket */
+        burgermenu.setAttribute("aria-label", menuOpen ? "Åbn menu" : "Luk menu"); /*Skærmlæseren kan fortælle om det knappen bruges til at åbne eller lukke burgermenuen med  */
+
+        navigation.classList.toggle("open");
+    })
+
 
 
 // ===== DATA HENTNING =====
