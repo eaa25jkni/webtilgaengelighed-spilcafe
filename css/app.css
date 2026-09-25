@@ -4,7 +4,7 @@
 :root {
   /* Colors */
   --primary: rgb(169, 19, 16);
-  --secondary: rgba(199, 2, 0, 0.25);
+  --secondary: rgba(202, 71, 69, 0.923);
   --primary-light: #FAFAFA;
   --secondary-light: #3c4043;
 
@@ -459,36 +459,43 @@ ul {
   font-size: 1.2rem;
 }
 
+
+
+
+
 /* ============================
    HEADER DESIGN OG FILTRERING
    ============================= */
 
   header {
     display: flex;
+    width: 100%;
+    height: 5em;
   background: var(--primary);
   backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(172, 198, 201, 0.2);
   color: var(--text);
-  max-height: 6em;
-  padding: 1rem 0;
+  
+  padding: 1rem 2em;
   justify-content: space-between;
   
   align-items: center;
   position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
+  
   z-index: 1000;
   transition: var(--transition);
   box-shadow: var(--shadow);
 }
 
 .logo {
-  max-height: 5em;
-  width: auto;
-  max-width: 5em;
-  margin-left: 1rem;
-  justify-self: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 5em;
+  height: auto;
 }
 
 .nav-list {
@@ -505,9 +512,50 @@ ul {
   
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
 
 
+.favoritelist-link img {
+  width: 1.8em;
+  height: 1.8em;
+  
+} 
 
+.book-bord {
+  background-color: var(--bg);
+  color: var(--text);
+  
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+
+  padding: 0.6em 1em;
+  border-radius: 100px;
+
+}
+
+.book-bord:hover {
+  background-color: var(--secondary);
+}
+
+
+.burgermenu {
+  display: none; /*gemme den til start*/
+  background: none;
+  border: none;
+  cursor: pointer;
+  
+}
+
+.burgermenu img {
+  width: 3em;
+  height: 3em;
+
+}
 
 /* LOKATIONS DROPDOWN I MIDTEN */
 .header-location {

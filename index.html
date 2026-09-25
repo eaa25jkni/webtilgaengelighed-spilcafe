@@ -15,11 +15,11 @@
     <header>
 
       <!--logo-->
-      <a href="index.html" aria-label="Gå til forside">
+      <a href="index.html" aria-label="Gå til forside" class="logo">
         <img
           src="images/logo.png"
           alt="Spilcafelogo"
-          class="logo"
+          
         />
       </a>
 
@@ -42,33 +42,21 @@
 
 
         <!--book bord-->
-        <a href="" class="book-bord-button">
+        <a href="" class="book-bord">
           Book bord
         </a>
 
         <button class="burgermenu" type="button" aria-label="Åbn menu" aria-controls="main-navigation" aria-expanded="false"> <!--Vi sætter aria-expanded="false", så skærmlæsere kan fortælle om den er åben eller lukekt.-->
           <img src="images/burgermenu.svg">
 
-          <span></span>
-          <span></span>
-          <span></span>
+          
           
         </button>
 
       </div>
       
 
-    
 
-
-
-      <!-- Location filter i midten -->
-      <div class="header-location">
-        <label for="location-select" aria-label="Vælg lokation"></label>
-        <select id="location-select" class="location-dropdown">
-          <option value="all">Alle lokationer</option>
-        </select>
-      </div> 
 
       <!-- Header søgefelt og filter -->
       <!--<div class="header-controls">
@@ -168,6 +156,14 @@
               />
             </div>
           </div>
+
+          <!-- Location filter i midten -->
+      <div class="header-location">
+        <label for="location-select" aria-label="Vælg lokation"></label>
+        <select id="location-select" class="location-dropdown">
+          <option value="all">Alle lokationer</option>
+        </select>
+      </div> 
 
           <!-- <div class="filter-row">
             <label>Rating:</label>
