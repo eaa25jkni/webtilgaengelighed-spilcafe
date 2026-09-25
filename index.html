@@ -6,8 +6,6 @@
     <title>Spiloversigt | Spilcaféen</title>
     <link rel="icon" type="image/x-icon" href="/images/logo.png">
 
-    
-
     <link rel="stylesheet" href="css/app.css" />
   </head>
 
@@ -53,9 +51,43 @@
       </div>
       
 
+    </header> 
 
+    <main>
+      
+      <section id="hero-spiloversigt">
+        <h1>Spiloversigt</h1>
+        <p>Gå på opdagelse i spilhylderne - Søg direkte efter dine personlige favoritter, eller filtrér på spillerantal, varighed og café for at opdage dit næste eventyr</p>
 
-      </div> 
+      </section>
+
+      <section class="filter-sektion">
+        <search class="header-search">
+          <label for="header-search-input" class="gem">Søg spil efter titel</label>
+          <input
+            type="search"
+            id="header-search-input"
+            placeholder="Søg spil... (fx. Skak, Uno)"
+          />
+        </search>
+
+        <p id="search-results" class="gem" aria-live="polite"></p>
+
+        
+        <button
+          type="button"
+          id="filter-toggle"
+          class="filter-toggle"
+          aria-label="Åbn filtre"
+        >
+          <img src="images/filtrerings-ikon.png" alt="" class="filter-icon" />
+          <span id="filter-badge" class="filter-badge" style="display: none"
+            >0</span
+          >
+        </button>
+
+      </section>
+
 
       <!-- Filter dropdown panel -->
       <form class="filter-panel" id="filter-panel">
@@ -136,35 +168,15 @@
           </div>
 
           <!-- Location -->
-      <div class="filter-row">
-        <label for="location-select" aria-label="Vælg lokation">Placering:</label>
-        <select id="location-select" class="location-dropdown">
-          <option value="all">Alle lokationer</option>
-        </select>
-      </div> 
+          <div class="filter-row">
+            <label for="location-select" aria-label="Vælg lokation">Placering:</label>
+            <select id="location-select" class="location-dropdown">
+              <option value="all">Alle lokationer</option>
+            </select>
+          </div> 
 
-          <!-- <div class="filter-row">
-            <label>Rating:</label>
-            <div class="range-inputs">
-              <input
-                type="number"
-                id="header-rating-from"
-                placeholder="Fra"
-                min="0"
-                max="5"
-                step="1"
-              />
-              <span>til</span>
-              <input
-                type="number"
-                id="header-rating-to"
-                placeholder="Til"
-                min="0"
-                max="5"
-                step="1"
-              />
-            </div> -->
-          </div>
+          
+        
 
           <div class="filter-actions">
             <button type="button" id="header-clear-filters" class="clear-btn">
@@ -172,53 +184,9 @@
             </button>
             <button type="button" id="filter-close" class="close-btn">Vis resultater</button>
           </div>
+          
         </div>
       </form>
-    </header> 
-
-    <main>
-      <!-- <section>
-        <h1>Mest populære</h1>
-      </section> -->
-
-      <!-- Game karrussel -->
-      <!--  <div class="carousel-container">
-        <section id="game-carousel"></section>
-      </div> -->
-
-      <section id="hero-spiloversigt">
-        <h1>Spiloversigt</h1>
-        <p>Gå på opdagelse i spilhylderne - Søg direkte efter dine personlige favoritter, eller filtrér på spillerantal, varighed og café for at opdage dit næste eventyr</p>
-
-      </section>
-
-      <section class="filter-sektion">
-        <search class="header-search">
-          <label for="header-search-input" class="gem">Søg spil efter titel</label>
-          <input
-            type="search"
-            id="header-search-input"
-            placeholder="Søg spil... (fx. Skak, Uno)"
-          />
-        </search>
-
-        <p id="search-results" class="gem" aria-live="polite"></p>
-
-        
-        <button
-          type="button"
-          id="filter-toggle"
-          class="filter-toggle"
-          aria-label="Åbn filtre"
-        >
-          <img src="images/filtrerings-ikon.png" alt="" class="filter-icon" />
-          <span id="filter-badge" class="filter-badge" style="display: none"
-            >0</span
-          >
-        </button>
-
-        
-      </section>
 
       <section>
         <div class="games-header">
@@ -272,29 +240,7 @@
       </nav>
     </footer>
 
-    <!-- Bottom Navigation Bar -->
-     <!-- <nav class="bottom-nav">
-      <a href="index.html" class="bottom-nav-item bottom-nav-active">
-        <div class="bottom-nav-icon">
-          <img src="Images/hus-farvet.svg" alt="Hjem" />
-        </div>
-      </a>
-      <a href="profilside.html" class="bottom-nav-item">
-        <div class="bottom-nav-icon">
-          <img src="Images/bruger.svg" alt="Bruger" />
-        </div>
-      </a>
-      <a href="favoritside.html" class="bottom-nav-item">
-        <div class="bottom-nav-icon">
-          <img src="Images/hejrte.svg" alt="Favoritter" />
-        </div>
-      </a>
-      <a href="burgermenu.html" class="bottom-nav-item">
-        <div class="bottom-nav-icon">
-          <img src="Images/burgermenu.svg" alt="Burgermenu" />
-        </div>
-      </a>
-    </nav>  -->
+    
 
     <script src="js/oversigt.js"></script>
 

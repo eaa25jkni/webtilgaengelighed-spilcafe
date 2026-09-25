@@ -49,109 +49,9 @@
         </button>
 
       </div>
+       
+
       
-
-
-
-      </div> 
-
-      <!-- Filter dropdown panel -->
-      <form class="filter-panel" id="filter-panel">
-        <div class="filter-panel-content">
-          <button type="button" id="filter-panel-close" class="filter-panel-close" aria-label="Luk filter">&#10005;</button>
-          <h2>Filtrer spil</h2>
-
-          <!-- Sorter efter -->
-          <div class="filter-row">
-            <label for="header-sort-select">Sorter efter:</label>
-            <select id="header-sort-select">
-              <option value="all">Ingen sortering</option>
-              <option value="title">Titel (A-Å)</option>
-              <option value="title2">Titel (Å-A)</option>
-              <option value="rating">Mest populære</option>
-            </select>
-          </div>
-
-          <!-- Genre -->
-          <div class="filter-row">
-            <label for="header-genre-select">Genre:</label>
-            <select id="header-genre-select">
-              <option value="none">Alle genre</option>
-            </select>
-          </div>
-
-          <!-- Antal spillere -->
-          <div class="filter-row">
-            <label for="header-players-from">Antal spillere:</label>
-            <div class="range-inputs">
-              <input
-                type="number"
-                id="header-players-from"
-                placeholder="Fx. 2, 8"
-                min="1"
-                max="8"
-                step="1"
-              />
-            </div>
-          </div>
-
-          <!-- Spilletid -->
-          <div class="filter-row">
-            <label for="header-playtime-select">Spilletid:</label>
-            <select id="header-playtime-select">
-              <option value="all">Alle spilletider</option>
-              <option value="0-30">Under 30 minutter</option>
-              <option value="30-60">30-60 minutter</option>
-              <option value="60-120">60-120 minutter</option>
-              <option value="120-999">Mere end 2 timer</option>
-            </select>
-          </div>
-
-          <!-- Sværhedsgrad -->
-          <div class="filter-row">
-            <label for="header-difficulty-select">Sværhedsgrad:</label>
-            <select id="header-difficulty-select">
-              <option value="none">Alle sværhedsgrader</option>
-              <option value="Let">Let</option>
-              <option value="Mellem">Mellem</option>
-              <option value="Svær">Svær</option>
-            </select>
-          </div>
-
-          <!-- Alder -->
-          <div class="filter-row">
-            <label for="header-age-from">Minium aldersgrænse:</label>
-            <div class="range-inputs">
-              <input
-                type="number"
-                id="header-age-from"
-                placeholder="Fx. 7, 18"
-                min="0"
-                max="100"
-                step="1"
-              />
-            </div>
-          </div>
-
-          <!-- Location -->
-      <div class="filter-row">
-        <label for="location-select" aria-label="Vælg lokation">Placering:</label>
-        <select id="location-select" class="location-dropdown">
-          <option value="all">Alle lokationer</option>
-        </select>
-      </div> 
-
-          
-          </div>
-
-          <div class="filter-actions">
-            <button type="button" id="header-clear-filters" class="clear-btn">
-              Ryd alle filtre
-            </button>
-            <button type="button" id="filter-close" class="close-btn">Vis resultater</button>
-          </div>
-        </div>
-      </form>
     </header> 
 
     <!-- Main content -->
@@ -163,15 +63,7 @@
         </div>
       </section>
 
-      <!-- No favorites message (hidden initially) -->
-      <!-- <div class="no-favorites" id="no-favorites" style="display: none">
-        <h3>Du har ingen favoritter endnu</h3>
-        <p>
-          Klik på ❤️ ikonerne på spillene for at tilføje dem til dine
-          favoritter!
-        </p>
-        <a href="index.html" class="bottom-nav-item">Se alle spil</a>
-      </div> -->
+      
 
       <!-- Game list -->
       <section id="favorites-list" class="game-grid"></section>
@@ -188,29 +80,7 @@
       </form>
     </dialog>
 
-    <!-- Bottom Navigation Bar -->
-    <!-- <nav class="bottom-nav">
-      <a href="index.html" class="bottom-nav-item">
-        <div class="bottom-nav-icon">
-          <img src="Images/hus.svg" alt="Hjem" />
-        </div>
-      </a>
-      <a href="profilside.html" class="bottom-nav-item">
-        <div class="bottom-nav-icon">
-          <img src="Images/bruger.svg" alt="Bruger" />
-        </div>
-      </a>
-      <a href="favoritside.html" class="bottom-nav-item bottom-nav-active">
-        <div class="bottom-nav-icon">
-          <img src="Images/hjerte-farvet.svg" alt="Favoritter" />
-        </div>
-      </a>
-      <a href="burgermenu.html" class="bottom-nav-item">
-        <div class="bottom-nav-icon">
-          <img src="Images/burgermenu.svg" alt="Burgermenu" />
-        </div>
-      </a>
-    </nav> -->
+    
 
     <script src="js/favoritside.js"></script>
   </body>

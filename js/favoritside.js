@@ -49,12 +49,8 @@ document.addEventListener("DOMContentLoaded", initApp);
         allGames = await response.json();
         console.log(`📊 JSON data modtaget: ${allGames.length} games`);
 
-        //populateGenreDropdown(); // Udfyld dropdown med genres <-----
-        //LocationDropdown(); // Udfyld dropdown med locations <-----
         displayFavorites();
-        //populateCarousel(); // Tilføj top-rated games til karrussel
-        //populateScrollCarousel(); // Tilføj nyere games til scroll-karrussel
-        //updateActiveFiltersDisplay(); // Initialiser aktive filtre display
+        
     }
 
 
@@ -81,16 +77,7 @@ document.addEventListener("DOMContentLoaded", initApp);
             displayFavorites(); //Så kører vi listen igen, således ikonerne opdateres
         }
 
-        // Opdater alle ikoner og aria for et specifikt spil
-        function updateFavoriteButton(button, id) {
-        const fav = isFavorite(id);
-            button.setAttribute("aria-pressed", fav) //tilføjer antributten aria-pressed
-            button.querySelector("img").scr = fav 
-            ? "images/favorit-fyldt-ikon.png" //hvis fav er sand, så skal hjertet være fyldt
-            : "images/favorit-tomt-ikon.png"; //hvis falsk skal hjertet være tomt
-        }
-     
-
+        
 
 // ===== VISNING =====  
 
@@ -110,7 +97,7 @@ function displayFavorites() {
     .map((game) => {      //.map kører igennem vores games, og skal tjekke om spillet er en favorit, og dermed bliver det rigtige ikon vist.
 
     return `
-        <article class="game-card">
+        <article class="game-card" tabindex="0">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
                 <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
                     <img src="images/favorit-fyldt-ikon.png" alt="FavoritKnap" class="favorite-icon"/>
@@ -140,7 +127,7 @@ function displayFavorites() {
     //=========DOM-MANIPULATION==========
     favoritesContainer.innerHTML = html; //Her indsættes det i vores HTML i vores favoriteContainer.
 
-    addFavoriteButtonListeners(favoriteGames);
+    addFavoriteButtonListeners();
     addCardListeners(favoriteGames);
 
 }
@@ -148,7 +135,7 @@ function displayFavorites() {
 
     //=========FAVORITKNAPPER==========
 
-    function addFavoriteButtonListeners(gameList) {
+    function addFavoriteButtonListeners() {
         //vi samler alle favorit knapperne i en variable ved at søge efter alle elementer med classen favorite-btn
         const favoriteButtons = favoritesContainer.querySelectorAll(".favorite-btn");
 

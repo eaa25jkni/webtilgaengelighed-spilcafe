@@ -192,6 +192,7 @@ function initFilterPanel() {
     "#header-players-from",
     "#header-difficulty-select",
     "#header-age-from",
+    "#location-select"
   ];
 
   filterInputs.forEach((selector) => {
@@ -223,577 +224,599 @@ function initFilterPanel() {
         populateGenreDropdown(); // Udfyld dropdown med genres <-----
         LocationDropdown(); // Udfyld dropdown med locations <-----
         displayGames(allGames);
-        //populateCarousel(); // Tilføj top-rated games til karrussel
-        //populateScrollCarousel(); // Tilføj nyere games til scroll-karrussel
+        
         updateActiveFiltersDisplay(); // Initialiser aktive filtre display
     }
 
 
-    //===========FAVORITTER===========
-        function isFavorite(id) {
-            return favoriteIds.includes(id);
+
+
+//======================
+//       FAVORITTER
+// =========================
+  function isFavorite(id) {
+      return favoriteIds.includes(id);
+  }
+
+  //=====FAVORIT TOGGLE FUNKTION======
+
+    //Man skal kunne toggle mellem gem favorit og fjern favorit.
+
+    function toggleFavorite(id) {
+        if (favoriteIds.includes(id)) {
+            favoriteIds = favoriteIds.filter((favoriteId) => {
+                return favoriteId !== id; //tjekker på en id, hvis det er inkluderet, så er det true, og så skal den Så fjerne id fra arrayet.
+            });
+        } else {
+            favoriteIds.push(id);  //hvis ikke id findes på listen, så er det false og den kører push, hvor den tilføjer id'et favorite id
         }
 
-        //=====FAVORIT TOGGLE FUNKTION======
+        localStorage.setItem("favoriteGames", JSON.stringify(favoriteIds)); //Vi gemmer i localstorage
 
-        //Man skal kunne toggle mellem gem favorit og fjern favorit.
+        displayGames(allGames); //Så kører vi listen igen, således ikonerne opdateres
+    }
 
-        function toggleFavorite(id) {
-            if (favoriteIds.includes(id)) {
-                favoriteIds = favoriteIds.filter((favoriteId) => {
-                    return favoriteId !== id; //tjekker på en id, hvis det er inkluderet, så er det true, og så skal den Så fjerne id fra arrayet.
-                });
-            } else {
-                favoriteIds.push(id);  //hvis ikke id findes på listen, så er det false og den kører push, hvor den tilføjer id'et favorite id
-            }
-
-            localStorage.setItem("favoriteGames", JSON.stringify(favoriteIds)); //Vi gemmer i localstorage
-
-            displayGames(allGames); //Så kører vi listen igen, således ikonerne opdateres
-        }
-
-        // Opdater alle ikoner og aria for et specifikt spil
-        function updateFavoriteButton(button, id) {
-        const fav = isFavorite(id);
-            button.setAttribute("aria-pressed", fav) //tilføjer antributten aria-pressed
-            button.querySelector("img").src = fav 
-            ? "images/favorit-fyldt-ikon.png" //hvis fav er sand, så skal hjertet være fyldt
-            : "images/favorit-tomt-ikon.png"; //hvis falsk skal hjertet være tomt
-        }
-     
+    // Opdater alle ikoner og aria for et specifikt spil
+    function updateFavoriteButton(button, id) {
+    const fav = isFavorite(id);
+        button.setAttribute("aria-pressed", fav) //tilføjer antributten aria-pressed
+        button.querySelector("img").src = fav 
+        ? "images/favorit-fyldt-ikon.png" //hvis fav er sand, så skal hjertet være fyldt
+        : "images/favorit-tomt-ikon.png"; //hvis falsk skal hjertet være tomt
+    }
+  
 
 
-// ===== VISNING =====  
+// ====================== 
+//     VISNING af card 
+// ======================  
 
-// Vis ÉT game card til game list
-function displayGames(gameList) {
+  // Vis ÉT game card til game list
+  function displayGames(gameList) {
 
-    const html = gameList
-    .map((game, index) => {      //.map kører igennem vores games, og skal tjekke om spillet er en favorit, og dermed bliver det rigtige ikon vist. Parameteren index bliver index'et for det gældene kort puttet ind.
-        let favoriteIcon
+      const html = gameList
+      .map((game, index) => {      //.map kører igennem vores games, og skal tjekke om spillet er en favorit, og dermed bliver det rigtige ikon vist. Parameteren index bliver index'et for det gældene kort puttet ind.
+          let favoriteIcon
 
-        if (isFavorite(game.id)) { //hvis favorit id'et er true, så skal der vises en fyldt hjerte
-            favoriteIcon = "images/favorit-fyldt-ikon.png"
+          if (isFavorite(game.id)) { //hvis favorit id'et er true, så skal der vises en fyldt hjerte
+              favoriteIcon = "images/favorit-fyldt-ikon.png"
 
-        } else { //hvis ikke så skal stjernen være tom
-            favoriteIcon = "images/favorit-tomt-ikon.png"
-        }
+          } else { //hvis ikke så skal stjernen være tom
+              favoriteIcon = "images/favorit-tomt-ikon.png"
+          }
 
-        const loadingOptimize = index < 4 ? "eager" : "lazy";   //De fire første kort bliver vist above the fold, så de skal ik have lazy loading på. Derfor opstiller vi en betingelse, hvor hvis index er under fire skal loading"eager" på eller skal lazy på.
+          const loadingOptimize = index < 4 ? "eager" : "lazy";   //De fire første kort bliver vist above the fold, så de skal ik have lazy loading på. Derfor opstiller vi en betingelse, hvor hvis index er under fire skal loading"eager" på eller skal lazy på.
 
-    return `
-        <article class="game-card" tabindex="0">
-                <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" loading="${loadingOptimize}" />
-                <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
-                    <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon" width="200" height="200" />
-                </button>
-                
-            <div class="game-info">
-                <div class="game-card-overskrift">
-                    <h3>${game.title} </h3>
-                    <div class="game-rating">
-                        <img src="images/rating-ikon.png" alt="Rating" class="rating-icon">${game.rating}
-                    </div>  
+      return `
+          <article class="game-card" tabindex="0">
+                  <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" loading="${loadingOptimize}" />
+                  <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
+                      <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon" width="200" height="200" />
+                  </button>
+                  
+              <div class="game-info">
+                  <div class="game-card-overskrift">
+                      <h3>${game.title} </h3>
+                      <div class="game-rating">
+                          <img src="images/rating-ikon.png" alt="Rating" class="rating-icon">${game.rating}
+                      </div>  
 
-                </div>
+                  </div>
 
-                <ul class="info-liste">
-                    <li class="game-shelf">Hylde ${game.shelf}</li>
-                    <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
-                    <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-                    <li class="game-genre"><img src="images/genre-ikon.svg" alt="Genre" class="genre-icon"> ${game.genre}</li>
-                </ul>
-            </div>
-        </article>
-    
-    `;
-    })
-    .join(""); //det samler vores html stringer som map laver til en lang html-stirng.
-    
+                  <ul class="info-liste">
+                      <li class="game-shelf">Hylde ${game.shelf}</li>
+                      <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
+                      <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
+                      <li class="game-genre"><img src="images/genre-ikon.svg" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                  </ul>
+              </div>
+          </article>
+      
+      `;
+      })
+      .join(""); //det samler vores html stringer som map laver til en lang html-stirng.
+      
 
 
     //=========DOM-MANIPULATION==========
-    gamesContainer.innerHTML = html; //Her indsættes det i vores HTML i vores gamesContainer.
+      gamesContainer.innerHTML = html; //Her indsættes det i vores HTML i vores gamesContainer.
 
 
-    //=========FAVORITKNAPPER==========
 
-        //vi samler alle favorit knapperne i en variable ved at søge efter alle elementer med classen favorite-btn
-        const favoriteButtons = gamesContainer.querySelectorAll(".favorite-btn");
+    //=============================================
+    // FAVORITKNAPPER SÅ DE VIRKER
+    // ==============================================
 
-        favoriteButtons.forEach((button) => {
-            button.addEventListener("click", (event) => {
-                event.stopPropagation(); //dette gør sådan at kørtet ikke også åbnes, når favoritknappen klikkes.
-                const gameId = Number(button.dataset.id); //hvorefter den så skal hente hver id og lave det om et tal
-            toggleFavorite(gameId);
+      //vi samler alle favorit knapperne i en variable ved at søge efter alle elementer med classen favorite-btn
+      const favoriteButtons = gamesContainer.querySelectorAll(".favorite-btn");
 
-            //Tilgængelighed til tastaturnavigation
-            //Når der klikkes på en favoritknap gentegnes hele listen, så for at sørge for at brugeren starter samme sted som før med tab, altså at de ikke mister deres position:
-            const sameButton = gamesContainer.querySelector (
-                `.favorite-btn[data-id="${gameId}"]`     //vi finder samme favoritknap, og gemmer den i const sameButton
-            );
-            if (sameButton) {
-                sameButton.focus(); //gør den valgte favorit knap aktiv igen
-            }
+      favoriteButtons.forEach((button) => {
+          button.addEventListener("click", (event) => {
+              event.stopPropagation(); //dette gør sådan at kørtet ikke også åbnes, når favoritknappen klikkes.
+              const gameId = Number(button.dataset.id); //hvorefter den så skal hente hver id og lave det om et tal
+          toggleFavorite(gameId);
 
-            });
-        });
+          //Tilgængelighed til tastaturnavigation
+          //Når der klikkes på en favoritknap gentegnes hele listen, så for at sørge for at brugeren starter samme sted som før med tab, altså at de ikke mister deres position:
+          const sameButton = gamesContainer.querySelector (
+              `.favorite-btn[data-id="${gameId}"]`     //vi finder samme favoritknap, og gemmer den i const sameButton
+          );
+          if (sameButton) {
+              sameButton.focus(); //gør den valgte favorit knap aktiv igen
+          }
 
-
-    //=========ÅBEN MODAL===========
-        //Når vi indtænker tilgængelighed er det vigtigt, at man kan åbne game-card både med musen (click) og med tasturet (tab og enter)
-
-        const gameCards = document.querySelectorAll(".game-card")
-
-        gameCards.forEach((card, index) => { //for hvert kort får funktionen de værdier: det aktuelle kort (html elementet), og index, altså den placering i listen.
-            const game = gameList[index];
-
-            //Så man kan klikke med musen
-            card.addEventListener("click", () => {
-                showGameModal(game);
-            });
+          });
+      });
 
 
-            //Så man kan bruge tab og enter eller mellemrum til at åbne modalen
-            card.addEventListener("keydown", (event) => {
-                if (event.target !== card) return; //så fokus kun gælder når det er på selve kortet og ikke når det er på favoritknappen som ligger inden i kortet.
+    //===========================
+    //        ÅBEN MODAL
+    // =============================
+      //Når vi indtænker tilgængelighed er det vigtigt, at man kan åbne game-card både med musen (click) og med tasturet (tab og enter)
 
-                if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault(); //som standart ruller mellemrumtasten ned på siden, det ville vi gerne undgå når de klikker på kortet. Derfor siger vi dette
-                    showGameModal(game);
-                }
-            });
+      const gameCards = document.querySelectorAll(".game-card")
 
-        });
-}
+      gameCards.forEach((card, index) => { //for hvert kort får funktionen de værdier: det aktuelle kort (html elementet), og index, altså den placering i listen.
+          const game = gameList[index];
+
+          //Så man kan klikke med musen
+          card.addEventListener("click", () => {
+              showGameModal(game);
+          });
 
 
-// ===== MODAL =====
+          //Så man kan bruge tab og enter eller mellemrum til at åbne modalen
+          card.addEventListener("keydown", (event) => {
+              if (event.target !== card) return; //så fokus kun gælder når det er på selve kortet og ikke når det er på favoritknappen som ligger inden i kortet.
+
+              if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault(); //som standart ruller mellemrumtasten ned på siden, det ville vi gerne undgå når de klikker på kortet. Derfor siger vi dette
+                  showGameModal(game);
+              }
+          });
+
+      });
+  }
+
+
+// =========================
+//      MODAL FUNKTION
+// =========================
     function showGameModal(game) {
-    console.log("🎭 Åbner modal for:", game.title);
+      console.log("🎭 Åbner modal for:", game.title);
 
-    // Byg HTML struktur dynamisk
-    const dialogContent = document.querySelector("#dialog-content");
-    const favoriteIconSrc = isFavorite(game.id)
-        ? "images/favorit-fyldt-ikon.png"
-        : "images/favorit-tomt-ikon.png";
+      // Byg HTML struktur dynamisk
+      const dialogContent = document.querySelector("#dialog-content");
+      const favoriteIconSrc = isFavorite(game.id)
+          ? "images/favorit-fyldt-ikon.png"
+          : "images/favorit-tomt-ikon.png";
 
-    dialogContent.innerHTML = `
-    <article class="modal-game-card">
+      dialogContent.innerHTML = `
+      <article class="modal-game-card">
 
-        <div class="game-poster-container">
-            <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
-            <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
-                        <img src="${favoriteIconSrc}" alt="FavoritKnap" class="favorite-icon"/>
-            </button>
-        </div>
+          <div class="game-poster-container">
+              <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
+              <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
+                          <img src="${favoriteIconSrc}" alt="FavoritKnap" class="favorite-icon"/>
+              </button>
+          </div>
 
-        <div class="dialog-game-info">
-            <h1>${game.title} </h1>
-            <p class="game-description">${game.description}</p>
-            <p class="game-shelf">Hylde ${game.shelf}</p>
+          <div class="dialog-game-info">
+              <h1>${game.title} </h1>
+              <p class="game-description">${game.description}</p>
+              <p class="game-shelf">Hylde ${game.shelf}</p>
 
-            <ul class="game-icons-grid">
-                <li class="game-genre"><img src="images/genre-ikon.svg" alt="Genre" class="genre-icon"> ${game.genre}</li>
-                <li class="game-rating"><img src="images/rating-ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</li>
-                <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
-                <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-                <li class="game-age"><img src="images/alder-ikon.svg" alt="Age" class="age-icon"> ${game.age}+</li>
-                <li class="game-difficulty"><img src="images/grad-ikon.svg" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</li>
-            </ul>
+              <ul class="game-icons-grid">
+                  <li class="game-genre"><img src="images/genre-ikon.svg" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                  <li class="game-rating"><img src="images/rating-ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</li>
+                  <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
+                  <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
+                  <li class="game-age"><img src="images/alder-ikon.svg" alt="Age" class="age-icon"> ${game.age}+</li>
+                  <li class="game-difficulty"><img src="images/grad-ikon.svg" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</li>
+              </ul>
 
-            <p class="game-rules">${game.rules}</p>
-            </div>
-        </article>
-    `;
+              <p class="game-rules">${game.rules}</p>
+              </div>
+          </article>
+      `;
 
-    // Favoritknappen inde i modalen
-    const modalFavoriteButton = dialogContent.querySelector(".favorite-btn");
-    modalFavoriteButton.addEventListener("click", () => {
-        toggleFavorite(game.id);
-        updateFavoriteButton(modalFavoriteButton, game.id); //så opdatere favoritknappen kun
-    });
+      // Favoritknappen inde i modalen
+      const modalFavoriteButton = dialogContent.querySelector(".favorite-btn");
+      modalFavoriteButton.addEventListener("click", () => {
+          toggleFavorite(game.id);
+          updateFavoriteButton(modalFavoriteButton, game.id); //så opdatere favoritknappen kun
+      });
 
-  // Åbn modalen og forhindre baggrunds scroll
-  document.body.classList.add("modal-open");
-  document.querySelector("#game-dialog").showModal();
+      // Åbn modalen og forhindre baggrunds scroll
+      document.body.classList.add("modal-open");
+      document.querySelector("#game-dialog").showModal();
 
-  // Luk modal ved klik på backdrop eller ESC
-  const dialog = document.querySelector("#game-dialog");
+      // Luk modal ved klik på backdrop eller ESC
+      const dialog = document.querySelector("#game-dialog");
 
-  dialog.addEventListener("close", () => {
-    document.body.classList.remove("modal-open");
-  });
+      dialog.addEventListener("close", () => {
+        document.body.classList.remove("modal-open");
+      });
 
-  dialog.addEventListener("click", (e) => {
-    if (e.target === dialog) {
-      dialog.close();
+      dialog.addEventListener("click", (e) => {
+        if (e.target === dialog) {
+          dialog.close();
+        }
+      });
+
     }
-  });
-
-}
 
 
 
 
-// ===== FILTRERING =====
+// ================================
+//       FILTRERING funktion
+// ================================
 
-// Dropdownmenu med genre
-function populateGenreDropdown() {
-  const genreSelect = document.querySelector("#header-genre-select");
-  const genres = new Set();
+  // Dropdownmenu med genre
+  function populateGenreDropdown() {
+    const genreSelect = document.querySelector("#header-genre-select");
+    const genres = new Set();
 
-  for (const game of allGames) {
-    genres.add(game.genre);
+    for (const game of allGames) {
+      genres.add(game.genre);
+    }
+
+    // Fjern gamle options undtagen 'Alle kategorier'
+    genreSelect.innerHTML = '<option value="none">Alle genre</option>';
+
+    const sortedGenres = Array.from(genres).sort();
+    for (const genre of sortedGenres) {
+      genreSelect.insertAdjacentHTML(
+        "beforeend",
+        `<option value="${genre}">${genre}</option>`
+      );
+    }
   }
 
-  // Fjern gamle options undtagen 'Alle kategorier'
-  genreSelect.innerHTML = '<option value="none">Alle genre</option>';
+  // Dropdownmenu med byer
+  function LocationDropdown() {
+    const locationSelect = document.querySelector("#location-select");
+    const location = new Set();
 
-  const sortedGenres = Array.from(genres).sort();
-  for (const genre of sortedGenres) {
-    genreSelect.insertAdjacentHTML(
-      "beforeend",
-      `<option value="${genre}">${genre}</option>`
-    );
-  }
-}
+    for (const game of allGames) {
+      location.add(game.location);
+    }
 
-// Dropdownmenu med byer
-function LocationDropdown() {
-  const locationSelect = document.querySelector("#location-select");
-  const location = new Set();
+    // Fjern gamle options undtagen 'Alle lokationer'
+    locationSelect.innerHTML = '<option value="all">Alle lokationer</option>';
 
-  for (const game of allGames) {
-    location.add(game.location);
-  }
-
-  // Fjern gamle options undtagen 'Alle lokationer'
-  locationSelect.innerHTML = '<option value="all">Alle lokationer</option>';
-
-  const sortedLocation = Array.from(location).sort();
-  for (const location of sortedLocation) {
-    locationSelect.insertAdjacentHTML(
-      "beforeend",
-      `<option value="${location}">${location}</option>`
-    );
-  }
-}
-
-function filterGames() {
-  // Filtrer games baseret på søgning, genre, playtime, ovs. // OBS: game.genre skal sammenlignes med === (ikke .includes())
-
-  // Search variable - header
-  const searchValue = document
-    .querySelector("#header-search-input")
-    .value.toLowerCase();
-
-  // Kategori (genre) variable
-  const genreValue = document.querySelector("#header-genre-select").value;
-
-  // Sorterings variable - tjek begge sort dropdowns
-  const headerSortValue = document.querySelector("#header-sort-select").value;
-  const mainSortValue = document.querySelector("#main-sort-select").value;
-  // Brug main sort som primær, fallback til header sort
-  const sortValue = mainSortValue !== "all" ? mainSortValue : headerSortValue;
-
-  // Location variable - fra header
-  const locationValue = document.querySelector("#location-select").value;
-
-
-
-  // Antal spillere variable - fra header
-  const playersFrom =
-    Number(document.querySelector("#header-players-from").value) || 0;
-
-  // Sværhedsgrad variable - fra header
-  const difficultyValue = document.querySelector(
-    "#header-difficulty-select"
-  ).value;
-
-  // Min alder variable - fra header
-  const ageFrom = Number(document.querySelector("#header-age-from").value) || 0;
-
-  console.log("🔄 Filtrerer games...");
-
-  // Start med alle games
-  let filteredGames = allGames;
-
-  // TRIN 1: Filtrer på søgetekst
-  if (searchValue) {
-    filteredGames = filteredGames.filter((game) => {
-      return game.title.toLowerCase().includes(searchValue);
-    });
+    const sortedLocation = Array.from(location).sort();
+    for (const location of sortedLocation) {
+      locationSelect.insertAdjacentHTML(
+        "beforeend",
+        `<option value="${location}">${location}</option>`
+      );
+    }
   }
 
-  // TRIN 2: Filter på kategori (genre) (fra dropdown)
-  if (genreValue !== "none") {
-    filteredGames = filteredGames.filter((game) => {
-      return game.genre.includes(genreValue);
-    });
-  }
 
-  // TRIN 3: Filter på location (fra dropdown)
-  if (locationValue !== "all") {
-    filteredGames = filteredGames.filter((game) => {
-      return game.location === locationValue;
-    });
-  }
+  //================Filtering af spil====================
+    function filterGames() {
+      // Filtrer games baseret på søgning, genre, playtime, ovs. // OBS: game.genre skal sammenlignes med === (ikke .includes())
 
-  // TRIN 4: Playtime filter
-  const playtimeValue = document.querySelector("#header-playtime-select").value;
+      // Search variable - header
+      const searchValue = document
+        .querySelector("#header-search-input")
+        .value.toLowerCase();
 
-if (playtimeValue !== "all") {
+      // Kategori (genre) variable
+      const genreValue = document.querySelector("#header-genre-select").value;
 
-  const [minPlaytime, maxPlaytime] = playtimeValue.split("-").map(Number);   // Splitter f.eks. "30-60" op i minPlaytime = 30 og maxPlaytime = 60
+      // Sorterings variable - tjek begge sort dropdowns
+      const headerSortValue = document.querySelector("#header-sort-select").value;
+      const mainSortValue = document.querySelector("#main-sort-select").value;
+      // Brug main sort som primær, fallback til header sort
+      const sortValue = mainSortValue !== "all" ? mainSortValue : headerSortValue;
 
-  filteredGames = filteredGames.filter((game) => {
-    const playtime = parseInt(game.playtime); // Henter tal fra game.playtime og lavet det til et interval
-    return playtime >= minPlaytime && playtime <= maxPlaytime;
-  });
-}
+      // Location variable - fra header
+      const locationValue = document.querySelector("#location-select").value;
 
-  
 
-  // TRIN 6: Antal spillere filter
-  if (playersFrom > 0) {
-    filteredGames = filteredGames.filter((game) => {
-      // Tjek om den indtastede værdi ligger inden for spillets min-max spænd
-      return playersFrom >= game.players.min && playersFrom <= game.players.max;
-    });
-  }
 
-  // TRIN 7: Sværhedsgrad filter
-  if (difficultyValue !== "none") {
-    filteredGames = filteredGames.filter((game) => {
-      return game.difficulty === difficultyValue;
-    });
-  }
+      // Antal spillere variable - fra header
+      const playersFrom =
+        Number(document.querySelector("#header-players-from").value) || 0;
 
-  // TRIN 8: Min alder filter
-  if (ageFrom > 0) {
-    filteredGames = filteredGames.filter((game) => {
-      return game.age >= ageFrom;
-    });
-  }
+      // Sværhedsgrad variable - fra header
+      const difficultyValue = document.querySelector(
+        "#header-difficulty-select"
+      ).value;
 
-  // TRIN 9: Sortering
-  if (sortValue === "title") {
-    filteredGames.sort((a, b) => a.title.localeCompare(b.title)); // A-Å
-  } else if (sortValue === "title2") {
-    filteredGames.sort((a, b) => b.title.localeCompare(a.title)); // Å-A
-  } else if (sortValue === "rating") {
-    filteredGames.sort((a, b) => b.rating - a.rating);
-  }
+      // Min alder variable - fra header
+      const ageFrom = Number(document.querySelector("#header-age-from").value) || 0;
 
-  console.log(`✅ Viser ${filteredGames.length} games`);
-  displayGames(filteredGames);
-  updateActiveFiltersDisplay(); // Opdater aktive filtre display
-}
+      console.log("🔄 Filtrerer games...");
 
-// ===== AKTIVE FILTRE FUNKTIONALITET =====
-function updateActiveFiltersDisplay() {
-  const activeFilters = getActiveFilters();
-  const filtersSection = document.querySelector("#active-filters-section");
-  const filtersList = document.querySelector("#active-filters-list");
+      // Start med alle games
+      let filteredGames = allGames;
 
-  const gamesTitle = document.querySelector("#games-title");
-  gamesTitle.textContent = activeFilters.length > 0 ? "Resultater" : "Alle spil";
+      // TRIN 1: Filtrer på søgetekst
+      if (searchValue) {
+        filteredGames = filteredGames.filter((game) => {
+          return game.title.toLowerCase().includes(searchValue);
+        });
+      }
 
-  if (activeFilters.length === 0) {
-    filtersSection.style.display = "none";
-    return;
-  }
+      // TRIN 2: Filter på kategori (genre) (fra dropdown)
+      if (genreValue !== "none") {
+        filteredGames = filteredGames.filter((game) => {
+          return game.genre.includes(genreValue);
+        });
+      }
 
-  filtersSection.style.display = "block";
-  filtersList.innerHTML = "";
+      // TRIN 3: Filter på location (fra dropdown)
+      if (locationValue !== "all") {
+        filteredGames = filteredGames.filter((game) => {
+          return game.location === locationValue;
+        });
+      }
 
-  activeFilters.forEach((filter) => {
-    const filterTag = createFilterTag(filter);
-    filtersList.appendChild(filterTag);
-  });
-}
+      // TRIN 4: Playtime filter
+      const playtimeValue = document.querySelector("#header-playtime-select").value;
 
-function getActiveFilters() {
-  const filters = [];
+    if (playtimeValue !== "all") {
 
-  // Søgning
-  const searchValue = document
-    .querySelector("#header-search-input")
-    .value.trim();
-  if (searchValue) {
-    filters.push({
-      type: "search",
-      label: `Søger: "${searchValue}"`,
-      value: searchValue,
-    });
-  }
+      const [minPlaytime, maxPlaytime] = playtimeValue.split("-").map(Number);   // Splitter f.eks. "30-60" op i minPlaytime = 30 og maxPlaytime = 60
 
-  // Kategori
-  const genreValue = document.querySelector("#header-genre-select").value;
-  if (genreValue !== "none") {
-    filters.push({
-      type: "genre",
-      label: `Genre: ${genreValue}`,
-      value: genreValue,
-    });
-  }
+      filteredGames = filteredGames.filter((game) => {
+        const playtime = parseInt(game.playtime); // Henter tal fra game.playtime og lavet det til et interval
+        return playtime >= minPlaytime && playtime <= maxPlaytime;
+      });
+    }
 
-  // Location
-  const locationValue = document.querySelector("#location-select").value;
-  if (locationValue !== "all") {
-    filters.push({
-      type: "location",
-      label: `Lokation: ${locationValue}`,
-      value: locationValue,
-    });
-  }
 
-  // Sortering
-  const headerSortValue = document.querySelector("#header-sort-select").value;
-  const mainSortValue = document.querySelector("#main-sort-select").value;
-  const activeSortValue =
-    mainSortValue !== "all" ? mainSortValue : headerSortValue;
+      // TRIN 6: Antal spillere filter
+      if (playersFrom > 0) {
+        filteredGames = filteredGames.filter((game) => {
+          // Tjek om den indtastede værdi ligger inden for spillets min-max spænd
+          return playersFrom >= game.players.min && playersFrom <= game.players.max;
+        });
+      }
 
-  if (activeSortValue !== "all") {
-    const sortLabels = {
-      title: "Titel (A-Å)",
-      title2: "Titel (Å-A)",
-      rating: "Mest populære",
-    };
-    filters.push({
-      type: "sort",
-      label: `Sorteret: ${sortLabels[activeSortValue]}`,
-      value: activeSortValue,
-    });
-  }
+      // TRIN 7: Sværhedsgrad filter
+      if (difficultyValue !== "none") {
+        filteredGames = filteredGames.filter((game) => {
+          return game.difficulty === difficultyValue;
+        });
+      }
 
-  // Spilletid
-  const playtimeSelect = document.querySelector("#header-playtime-select");
-if (playtimeSelect.value !== "all") {
-  const selectedText = playtimeSelect.options[playtimeSelect.selectedIndex].text;
-  filters.push({
-    type: "playtime",
-    label: `Spilletid: ${selectedText}`,
-    value: playtimeSelect.value,
-  });
-}
+      // TRIN 8: Min alder filter
+      if (ageFrom > 0) {
+        filteredGames = filteredGames.filter((game) => {
+          return game.age >= ageFrom;
+        });
+      }
 
-  
+      // TRIN 9: Sortering
+      if (sortValue === "title") {
+        filteredGames.sort((a, b) => a.title.localeCompare(b.title)); // A-Å
+      } else if (sortValue === "title2") {
+        filteredGames.sort((a, b) => b.title.localeCompare(a.title)); // Å-A
+      } else if (sortValue === "rating") {
+        filteredGames.sort((a, b) => b.rating - a.rating);
+      }
 
-  // Antal spillere
-  const playersFrom = document.querySelector("#header-players-from").value;
-  if (playersFrom) {
-    filters.push({
-      type: "players",
-      label: `Min. spillere: ${playersFrom}`,
-      value: playersFrom,
-    });
-  }
+      console.log(`✅ Viser ${filteredGames.length} games`);
+      displayGames(filteredGames);
+      updateActiveFiltersDisplay(); // Opdater aktive filtre display
+    }
 
-  // Sværhedsgrad
-  const difficultyValue = document.querySelector(
-    "#header-difficulty-select"
-  ).value;
-  if (difficultyValue !== "none") {
-    filters.push({
-      type: "difficulty",
-      label: `Sværhedsgrad: ${difficultyValue}`,
-      value: difficultyValue,
-    });
-  }
+  // ===== AKTIVE FILTRE FUNKTIONALITET =====
+    function updateActiveFiltersDisplay() {
+      const activeFilters = getActiveFilters();
+      const filtersSection = document.querySelector("#active-filters-section");
+      const filtersList = document.querySelector("#active-filters-list");
 
-  // Min. alder
-  const ageFrom = document.querySelector("#header-age-from").value;
-  if (ageFrom) {
-    filters.push({
-      type: "age",
-      label: `Min. ${ageFrom} år`,
-      value: ageFrom,
-    });
-  }
+      const gamesTitle = document.querySelector("#games-title");
+      gamesTitle.textContent = activeFilters.length > 0 ? "Resultater" : "Alle spil";
 
-  return filters;
-}
+      if (activeFilters.length === 0) {
+        filtersSection.style.display = "none";
+        return;
+      }
 
-function createFilterTag(filter) {
-  const tag = document.createElement("button");
-  tag.className = "active-filter-tag";
-  tag.innerHTML = `${filter.label} <span class="filter-remove-icon">×</span>`;
+      filtersSection.style.display = "block";
+      filtersList.innerHTML = "";
 
-  tag.addEventListener("click", () => {
-    removeFilter(filter);
-  });
+      activeFilters.forEach((filter) => {
+        const filterTag = createFilterTag(filter);
+        filtersList.appendChild(filterTag);
+      });
+    }
 
-  return tag;
-}
+    function getActiveFilters() {
+      const filters = [];
 
-function removeFilter(filter) {
-  switch (filter.type) {
-    case "search":
+      // Søgning
+      const searchValue = document
+        .querySelector("#header-search-input")
+        .value.trim();
+      if (searchValue) {
+        filters.push({
+          type: "search",
+          label: `Søger: "${searchValue}"`,
+          value: searchValue,
+        });
+      }
+
+      // Kategori
+      const genreValue = document.querySelector("#header-genre-select").value;
+      if (genreValue !== "none") {
+        filters.push({
+          type: "genre",
+          label: `Genre: ${genreValue}`,
+          value: genreValue,
+        });
+      }
+
+      // Location
+      const locationValue = document.querySelector("#location-select").value;
+      if (locationValue !== "all") {
+        filters.push({
+          type: "location",
+          label: `Lokation: ${locationValue}`,
+          value: locationValue,
+        });
+      }
+
+      // Sortering
+      const headerSortValue = document.querySelector("#header-sort-select").value;
+      const mainSortValue = document.querySelector("#main-sort-select").value;
+      const activeSortValue =
+        mainSortValue !== "all" ? mainSortValue : headerSortValue;
+
+      if (activeSortValue !== "all") {
+        const sortLabels = {
+          title: "Titel (A-Å)",
+          title2: "Titel (Å-A)",
+          rating: "Mest populære",
+        };
+        filters.push({
+          type: "sort",
+          label: `Sorteret: ${sortLabels[activeSortValue]}`,
+          value: activeSortValue,
+        });
+      }
+
+      // Spilletid
+      const playtimeSelect = document.querySelector("#header-playtime-select");
+    if (playtimeSelect.value !== "all") {
+      const selectedText = playtimeSelect.options[playtimeSelect.selectedIndex].text;
+      filters.push({
+        type: "playtime",
+        label: `Spilletid: ${selectedText}`,
+        value: playtimeSelect.value,
+      });
+    }
+
+      
+      // Antal spillere
+      const playersFrom = document.querySelector("#header-players-from").value;
+      if (playersFrom) {
+        filters.push({
+          type: "players",
+          label: `Min. spillere: ${playersFrom}`,
+          value: playersFrom,
+        });
+      }
+
+      // Sværhedsgrad
+      const difficultyValue = document.querySelector(
+        "#header-difficulty-select"
+      ).value;
+      if (difficultyValue !== "none") {
+        filters.push({
+          type: "difficulty",
+          label: `Sværhedsgrad: ${difficultyValue}`,
+          value: difficultyValue,
+        });
+      }
+
+      // Min. alder
+      const ageFrom = document.querySelector("#header-age-from").value;
+      if (ageFrom) {
+        filters.push({
+          type: "age",
+          label: `Min. ${ageFrom} år`,
+          value: ageFrom,
+        });
+      }
+
+      return filters;
+    }
+
+  //=========AKTIVE filter tag ============
+    function createFilterTag(filter) {
+      const tag = document.createElement("button");
+      tag.className = "active-filter-tag";
+      tag.innerHTML = `${filter.label} <span class="filter-remove-icon">×</span>`;
+
+      tag.addEventListener("click", () => {
+        removeFilter(filter);
+      });
+
+      return tag;
+    }
+
+
+  //=================
+  // Remove filter 
+  // ===================
+    function removeFilter(filter) {
+      switch (filter.type) {
+        case "search":
+          document.querySelector("#header-search-input").value = "";
+          break;
+        case "genre":
+          document.querySelector("#header-genre-select").value = "none";
+          break;
+        case "location":
+          document.querySelector("#location-select").value = "all";
+          break;
+        case "sort":
+          // Reset både header og main sort
+          document.querySelector("#header-sort-select").value = "all";
+          document.querySelector("#main-sort-select").value = "all";
+          break;
+        case "playtime":
+      document.querySelector("#header-playtime-select").value = "all";
+      break;
+        
+        case "players":
+          document.querySelector("#header-players-from").value = "";
+          break;
+        case "difficulty":
+          document.querySelector("#header-difficulty-select").value = "none";
+          break;
+        case "age":
+          document.querySelector("#header-age-from").value = "";
+          break;
+      }
+
+      // Opdaterer filter badge efter fjernelse ved filter knapperne
+      if (window.updateFilterBadge) {
+        window.updateFilterBadge();
+      }
+
+      // Kør filter igen for at opdatere listen
+      filterGames();
+    }
+
+  //=================
+  // Ryd alle filter 
+  // ===================
+
+    function clearAllFilters() {
+      console.log("🗑️ Rydder alle filtre");
+
+      // Ryd søgning og dropdown felter - header version
       document.querySelector("#header-search-input").value = "";
-      break;
-    case "genre":
       document.querySelector("#header-genre-select").value = "none";
-      break;
-    case "location":
       document.querySelector("#location-select").value = "all";
-      break;
-    case "sort":
-      // Reset både header og main sort
       document.querySelector("#header-sort-select").value = "all";
-      document.querySelector("#main-sort-select").value = "all";
-      break;
-    case "playtime":
-  document.querySelector("#header-playtime-select").value = "all";
-  break;
-    
-    case "players":
-      document.querySelector("#header-players-from").value = "";
-      break;
-    case "difficulty":
       document.querySelector("#header-difficulty-select").value = "none";
-      break;
-    case "age":
+      document.querySelector("#header-playtime-select").value = "all";
+
+      // Ryd main sort dropdown
+      document.querySelector("#main-sort-select").value = "all";
+
+      // Ryd de nye range felter - header version
+      
+      
+      document.querySelector("#header-players-from").value = "";
       document.querySelector("#header-age-from").value = "";
-      break;
-  }
 
-  // Opdaterer filter badge efter fjernelse ved filter knapperne
-  if (window.updateFilterBadge) {
-    window.updateFilterBadge();
-  }
+      // Opdater filter badge
+      if (window.updateFilterBadge) {
+        window.updateFilterBadge();
+      }
 
-  // Kør filter igen for at opdatere listen
-  filterGames();
-}
-
-// Ryd alle filtre – funktion
-function clearAllFilters() {
-  console.log("🗑️ Rydder alle filtre");
-
-  // Ryd søgning og dropdown felter - header version
-  document.querySelector("#header-search-input").value = "";
-  document.querySelector("#header-genre-select").value = "none";
-  document.querySelector("#location-select").value = "all";
-  document.querySelector("#header-sort-select").value = "all";
-  document.querySelector("#header-difficulty-select").value = "none";
-  document.querySelector("#header-playtime-select").value = "all";
-
-  // Ryd main sort dropdown
-  document.querySelector("#main-sort-select").value = "all";
-
-  // Ryd de nye range felter - header version
-  
-  
-  document.querySelector("#header-players-from").value = "";
-  document.querySelector("#header-age-from").value = "";
-
-  // Opdater filter badge
-  if (window.updateFilterBadge) {
-    window.updateFilterBadge();
-  }
-
-  // Kør filtrering igen (viser alle spil)
-  filterGames();
-}
+      // Kør filtrering igen (viser alle spil)
+      filterGames();
+    }
