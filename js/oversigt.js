@@ -101,6 +101,7 @@ function initFilterPanel() {
   const filterPanel = document.querySelector("#filter-panel");
   const filterClose = document.querySelector("#filter-close");
   const filterBadge = document.querySelector("#filter-badge");
+  const filterCloseX = document.querySelector("#filter-panel-close");
 
   // Toggle filter panel
   filterToggle.addEventListener("click", (e) => {
@@ -116,6 +117,8 @@ function initFilterPanel() {
 
   // Close filter panel
   filterClose.addEventListener("click", closeFilterPanel);
+
+  filterCloseX.addEventListener("click", closeFilterPanel);
 
   // Close when clicking outside
   document.addEventListener("click", (e) => {
@@ -280,9 +283,9 @@ function displayGames(gameList) {
 
     return `
         <article class="game-card" tabindex="0">
-                <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" loading="${loadingOptimize}"/>
+                <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" loading="${loadingOptimize}" />
                 <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
-                    <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon" />
+                    <img src="${favoriteIcon}" alt="FavoritKnap" class="favorite-icon" width="200" height="200" />
                 </button>
                 
             <div class="game-info">
@@ -379,7 +382,7 @@ function displayGames(gameList) {
     <article class="modal-game-card">
 
         <div class="game-poster-container">
-            <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" width="200" height="200"/>
+            <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
             <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
                         <img src="${favoriteIconSrc}" alt="FavoritKnap" class="favorite-icon"/>
             </button>
@@ -445,7 +448,7 @@ function populateGenreDropdown() {
   }
 
   // Fjern gamle options undtagen 'Alle kategorier'
-  genreSelect.innerHTML = '<option value="none">Alle kategorier</option>';
+  genreSelect.innerHTML = '<option value="none">Alle genre</option>';
 
   const sortedGenres = Array.from(genres).sort();
   for (const genre of sortedGenres) {
@@ -631,7 +634,7 @@ function getActiveFilters() {
   if (genreValue !== "none") {
     filters.push({
       type: "genre",
-      label: `Kategori: ${genreValue}`,
+      label: `Genre: ${genreValue}`,
       value: genreValue,
     });
   }

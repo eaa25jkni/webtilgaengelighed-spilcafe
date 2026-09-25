@@ -63,8 +63,9 @@
           <button type="button" id="filter-panel-close" class="filter-panel-close" aria-label="Luk filter">&#10005;</button>
           <h2>Filtrer spil</h2>
 
+          <!-- Sorter efter -->
           <div class="filter-row">
-            <label for="header-sort-select">Sorter efter</label>
+            <label for="header-sort-select">Sorter efter:</label>
             <select id="header-sort-select">
               <option value="all">Ingen sortering</option>
               <option value="title">Titel (A-Å)</option>
@@ -73,20 +74,22 @@
             </select>
           </div>
 
+          <!-- Genre -->
           <div class="filter-row">
-            <label for="header-genre-select">Kategori</label>
+            <label for="header-genre-select">Genre:</label>
             <select id="header-genre-select">
-              <option value="none">Alle kategorier</option>
+              <option value="none">Alle genre</option>
             </select>
           </div>
 
+          <!-- Antal spillere -->
           <div class="filter-row">
-            <label for="header-players-from">Antal spillere</label>
+            <label for="header-players-from">Antal spillere:</label>
             <div class="range-inputs">
               <input
                 type="number"
                 id="header-players-from"
-                placeholder="Fra"
+                placeholder="Fx. 2, 8"
                 min="1"
                 max="8"
                 step="1"
@@ -94,25 +97,21 @@
             </div>
           </div>
 
+          <!-- Spilletid -->
           <div class="filter-row">
             <label for="header-playtime-select">Spilletid:</label>
-           
-
-              <select id="header-playtime-select">
+            <select id="header-playtime-select">
               <option value="all">Alle spilletider</option>
               <option value="0-30">Under 30 minutter</option>
               <option value="30-60">30-60 minutter</option>
               <option value="60-120">60-120 minutter</option>
               <option value="120-999">Mere end 2 timer</option>
             </select>
-              
-
-              
-            
           </div>
 
+          <!-- Sværhedsgrad -->
           <div class="filter-row">
-            <label for="header-difficulty-select">Sværhedsgrad</label>
+            <label for="header-difficulty-select">Sværhedsgrad:</label>
             <select id="header-difficulty-select">
               <option value="none">Alle sværhedsgrader</option>
               <option value="Let">Let</option>
@@ -121,13 +120,14 @@
             </select>
           </div>
 
+          <!-- Alder -->
           <div class="filter-row">
-            <label for="header-age-from">Min. Alder</label>
+            <label for="header-age-from">Minium aldersgrænse:</label>
             <div class="range-inputs">
               <input
                 type="number"
                 id="header-age-from"
-                placeholder="Fra"
+                placeholder="Fx. 7, 18"
                 min="0"
                 max="100"
                 step="1"
@@ -135,9 +135,9 @@
             </div>
           </div>
 
-          <!-- Location filter i midten -->
-      <div class="header-location">
-        <label for="location-select" aria-label="Vælg lokation"></label>
+          <!-- Location -->
+      <div class="filter-row">
+        <label for="location-select" aria-label="Vælg lokation">Placering:</label>
         <select id="location-select" class="location-dropdown">
           <option value="all">Alle lokationer</option>
         </select>
@@ -167,10 +167,10 @@
           </div>
 
           <div class="filter-actions">
-            <button id="header-clear-filters" class="clear-btn">
+            <button type="button" id="header-clear-filters" class="clear-btn">
               Ryd alle filtre
             </button>
-            <button id="filter-close" class="close-btn">Vis resultater</button>
+            <button type="button" id="filter-close" class="close-btn">Vis resultater</button>
           </div>
         </div>
       </form>

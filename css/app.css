@@ -137,6 +137,7 @@ ul {
    ======================= */
 
 .active-filters-section {
+  width: 100%;
   padding: 1em 8rem;
   margin-top: -1rem; /* Close spacing to games header */
 }
@@ -144,6 +145,7 @@ ul {
 .active-filters-container {
   display: flex;
   align-items: center;
+  width: 100%;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
@@ -198,10 +200,17 @@ ul {
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
+  .active-filters-section {
+    padding: 1em 2rem;
+  }
+
+
   .active-filters-container {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+    
+
   }
   
   .active-filters-label {
@@ -452,6 +461,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
 }
 
 .range-separator {
@@ -459,8 +469,6 @@ ul {
   font-weight: bold;
   font-size: 1.2rem;
 }
-
-
 
 
 
@@ -497,6 +505,7 @@ ul {
 .logo img {
   width: 5em;
   height: auto;
+  aspect-ratio: 2/2;
 }
 
 .nav-list {
@@ -1022,13 +1031,15 @@ ul {
   }
 
   .game-poster {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3/4;
-    max-height: 15em;
+     width: 100%;
+    height: auto; 
+    aspect-ratio: 4/4;
+    
+    max-height: 150em;
     object-fit: contain;
     transition: var(--transition);
   }
+
 
   .game-card:hover .game-poster {
     transform: scale(1.0);
