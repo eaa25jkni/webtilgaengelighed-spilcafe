@@ -358,7 +358,7 @@ function displayGames(gameList) {
     <article class="modal-game-card">
 
         <div class="game-poster-container">
-            <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
+            <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" width="200" height="200"/>
             <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
                         <img src="${favoriteIconSrc}" alt="FavoritKnap" class="favorite-icon"/>
             </button>

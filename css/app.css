@@ -485,7 +485,7 @@ ul {
 
 .logo {
   max-height: 5em;
-  width: 100%;
+  width: auto;
   max-width: 5em;
   margin-left: 1rem;
   justify-self: start;
@@ -803,6 +803,9 @@ ul {
     transition: var(--transition);
     cursor: pointer;
     position: relative;
+
+    
+    
     
   }
 
@@ -819,6 +822,7 @@ ul {
 
   .game-poster {
     width: 100%;
+    height: auto;
     aspect-ratio: 3/4;
     max-height: 15em;
     object-fit: contain;
@@ -1286,40 +1290,35 @@ dialog#game-dialog::backdrop {
 
 /* GAME GRID RESPONSIVE LAYOUT */
 
-/* Mobile først - 1 kolonne */   /* SLET?? */
 #game-list, .game-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  width: 100%;
+  grid-template-columns: repeat(1, 1fr); /*mobil, 1 kolonne i grided.*/
   gap: 1.5rem;
+  
   margin: auto;
   margin-bottom: 2rem;
     padding: 1em 2rem;
- 
-  
 } 
 
-/* Tablet - 2 kolonner */
+/* Tablet - op til 2 kolonner */
 @media (min-width: 600px) {
   #game-list, .game-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /*den propper så mange kolonner ind der overhovedet er plads til. Med en min bredde på 250px for hver kolonne*/
     gap: 2rem;
-    padding: 2rem;
+    padding: 2em 8rem;
     
   }
 }
 
-/* Desktop - 3 kolonner */
-@media (min-width: 992px) {
-  #game-list, .game-grid {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
 
 /* Store skærme - 4 kolonner */
 @media (min-width: 1400px) {
   #game-list, .game-grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
     padding: 1em 8rem;
+    
+
   }
 }
 
