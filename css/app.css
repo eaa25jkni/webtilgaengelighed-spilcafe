@@ -582,6 +582,54 @@ ul {
   box-shadow: 0 0 0 2px rgba(199, 2, 0, 0.1);
 }
 
+
+/*======Responsiv header======*/
+@media (max-width: 900px) {
+
+  header {
+    padding: 0.5em 1em;
+    height: 4.5em;
+
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .burgermenu {
+    display: block;
+  }
+}
+
+@media (max-width: 400px) {
+
+  header {
+    padding: 0.5em 1em;
+
+
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .header-right {
+    gap: 1em;
+  }
+
+  .burgermenu {
+    display: block;
+  }
+
+  .book-bord {
+    font-size: 16px;
+  }
+
+}
+
+
+
+
 /* HEADER CONTROLS (SEARCH + FILTER) */  /* Højre side af header */
 .header-controls {
   display: flex;
@@ -1217,11 +1265,8 @@ dialog#game-dialog::backdrop {
 /* RESPONSIV HEADER */
 /* Table og mindre mobile enheder (Breakpoints) */
 @media (max-width: 768px) {
-  header {
-    grid-template-columns: auto 1fr auto;
-    gap: 0.5rem;
-    padding: 0.75rem 0;
-  }
+  
+  
   .logo {
     height: 60px;
     margin-left: 0.5rem;
