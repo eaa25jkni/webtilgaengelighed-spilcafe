@@ -593,11 +593,53 @@ ul {
   }
 
   .main-nav {
-    display: none;
+    display: block;
+    position: fixed;
+    top: 4.5em;
+    right: 0;
+    bottom: 0;
+    width: 350px;
+    height: 100vh;
+    padding: 2rem 1.5rem;
+    background-color: var(--primary);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.25);
+
+    transform: translateX(100%); /* Gemmer menuen ude til højre */
+    transition: transform 0.3s ease;
+  }
+
+  .main-nav.open {
+    transform: translateX(0); /*nustiller position så den bliver synlig på skærmen*/
+  }
+
+  .main-nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2em;
+    padding: 0;
+    margin: 0;
+  }
+
+  .main-nav a {
+    display: block;
+    padding: 0.75rem 0;
+    color: var(--bg);
+
+    font-size: 2em;
   }
 
   .burgermenu {
     display: block;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+  }
+
+  body.menu-open {
+    overflow: hidden; /*så man kan ik scrolle når burgermenuen er åben*/
   }
 }
 
@@ -609,9 +651,7 @@ ul {
 
   }
 
-  .main-nav {
-    display: none;
-  }
+  
 
   .header-right {
     gap: 1em;
