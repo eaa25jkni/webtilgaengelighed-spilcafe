@@ -5,7 +5,7 @@
   /* Colors */
   --primary: rgb(169, 19, 16);
   --secondary: rgba(202, 71, 69, 0.923);
-  --primary-light: #FAFAFA;
+  --primary-light: #fdfcf7;
   --secondary-light: #3c4043;
 
   /* Text - Dark Mode Colors */
@@ -14,7 +14,7 @@
 
   /* Backgrounds - Dark Mode */
   --bg: #FAFAFA;
-  --bg-card: #F1F1F1;
+  --bg-card: #f5f4f4;
 
   /* Semantic */
   /* Semantic */
@@ -79,7 +79,7 @@ body {
   font-family: poppins-medium, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #FAFAFA;
+  background-color: var(--primary-light);
   
   color: var(--text);
   min-height: 100vh;
@@ -921,6 +921,10 @@ ul {
     font-size: 4em;
    }
 
+   #hero-spiloversigt p {
+    max-width: 600px;
+   }
+
 
 
    /*Responsiv hero*/
@@ -1665,22 +1669,29 @@ dialog#game-dialog::backdrop {
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
+  
+  
 }
 
 .sort-controls label {
   font-weight: 500;
   color: var(--text);
   font-size: 0.9rem;
+  
 }
 
 .sort-controls select {
   padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 0.5rem;
-  background: var(--bg-card);
+  
   color: var(--text);
   font-size: 0.9rem;
   min-width: 150px;
+  
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+  background: var(--bg);
+  
 }
 
 .sort-controls select:focus {
