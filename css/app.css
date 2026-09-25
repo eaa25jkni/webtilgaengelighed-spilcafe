@@ -3,7 +3,7 @@
    =============== */
 :root {
   /* Colors */
-  --primary: rgb(199, 2, 0);
+  --primary: rgb(169, 19, 16);
   --secondary: rgba(199, 2, 0, 0.25);
   --primary-light: #FAFAFA;
   --secondary-light: #3c4043;
@@ -465,14 +465,14 @@ ul {
 
   header {
     display: flex;
-  background: #FAFAFA;
+  background: var(--primary);
   backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(172, 198, 201, 0.2);
   color: var(--text);
   max-height: 6em;
   padding: 1rem 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+  
   align-items: center;
   position: sticky;
   top: 0;
@@ -490,6 +490,22 @@ ul {
   margin-left: 1rem;
   justify-self: start;
 }
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  gap: 4em;
+  
+}
+
+.nav-list a {
+  font-size: 1.2em;
+  color: var(--bg);
+  text-decoration: none;
+  
+}
+
+
 
 /* LOKATIONS DROPDOWN I MIDTEN */
 .header-location {
