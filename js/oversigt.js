@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", initApp);
     function initApp() {
         console.log("javaScript kører");
         getGames(); // Hent alle games fra JSON og start applikationen
-      // ===== HEADER SØGNING OG FILTRERING =====
+      
+        // ===== HEADER SØGNING OG FILTRERING =====
   // Søgefelt i header - filtrer på spilnavn når brugeren skriver
   document.querySelector("#header-search-input").addEventListener("input", filterGames);
 
@@ -35,8 +36,6 @@ document.addEventListener("DOMContentLoaded", initApp);
   // ===== SPILLETID  FILTRERING =====
   document.querySelector("#header-playtime-select")
   .addEventListener("change", filterGames);
-  
-
   
 
   // Spillere felt
@@ -73,6 +72,28 @@ document.addEventListener("DOMContentLoaded", initApp);
   // Filter panel toggle functionality
   initFilterPanel();
 }
+
+/*======================
+        Burger menu
+========================= */
+
+    const burgermenu = document.querySelector(".burgermenu");
+    const navigation = document.querySelector(".main-nav");
+
+    burgermenu.addEventListener("click", () => {
+        const menuOpen = burgermenu.getAttribute("aria-expanded") === "true";
+
+        burgermenu.setAttribute("aria-expanded", !menuOpen); /*Så ved systemet og skærmlæseren at burgermenuen er åben eller lukket */
+        burgermenu.setAttribute("aria-label", menuOpen ? "Åbn menu" : "Luk menu"); /*Skærmlæseren kan fortælle om det knappen bruges til at åbne eller lukke burgermenuen med  */
+
+        navigation.classList.toggle("open");
+    })
+    
+
+
+/*======================
+        filter
+========================= */
 
 // Filter panel functionality
 function initFilterPanel() {
