@@ -130,7 +130,9 @@ ul {
   list-style-type: none;
 }
 
-
+.gem {
+  display: none;
+}
 
 
 /* ============================

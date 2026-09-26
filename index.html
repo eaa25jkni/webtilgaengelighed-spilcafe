@@ -66,7 +66,7 @@
 
         <!--Søgefelt-->
         <search class="header-search">
-          <label for="header-search-input" class="gem">Søg spil efter titel</label>
+          <label for="header-search-input">Søg spil efter titel</label>
           <input
             type="search"
             id="header-search-input"
@@ -196,7 +196,7 @@
         <div class="games-header">
           <h2 id="games-title">Alle spil</h2>
           <div class="sort-controls">
-            <label for="main-sort-select">Sortere efter</label>
+            <label for="main-sort-select">Sorter efter</label>
             <select id="main-sort-select">
               <option value="all">Ingen sortering</option>
               <option value="title">Titel (A-Å)</option>
@@ -212,7 +212,10 @@
         class="active-filters-section"
         id="active-filters-section"
         style="display: none"
-      >
+        aria-labelledby="active-filters-heading"> <!--så er sektionen tilkoblet en h2'er, og dermed kan skærmlæsebruger forstå hvilke sektion vi er i-->
+
+        <h2 id="active-filters-heading" class="gem">Aktive filtreringer</h2>
+
         <div class="active-filters-container">
           <div class="active-filters-list" id="active-filters-list">
           </div>
@@ -221,6 +224,7 @@
 
       <!-- Game List -->
       <section id="game-list"></section>
+      
     </main>
 
     <!-- Game Modal -->
