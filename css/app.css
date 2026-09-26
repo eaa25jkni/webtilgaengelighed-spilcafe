@@ -336,6 +336,7 @@ ul {
    }
 
    #hero-spiloversigt p {
+    font-size: 18px;
     max-width: 600px;
    }
 
@@ -989,11 +990,44 @@ ul {
 
 
 
-/* =====================
-   GAME GRID & CARDS
+  /* ================================
+     GAME GRID og RESPONSIVE LAYOUT 
+  ================================*/
+
+  #game-list, .game-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(1, 1fr); /*mobil, 1 kolonne i grided.*/
+    gap: 1.5rem;
+    
+    margin: auto;
+    margin-bottom: 2rem;
+      padding: 1em 2rem;
+  } 
+
+  /* Tablet - op til 2 kolonner */
+  @media (min-width: 600px) {
+    #game-list, .game-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /*den propper så mange kolonner ind der overhovedet er plads til. Med en min bredde på 250px for hver kolonne*/
+      gap: 2rem;
+      padding: 2em 8rem;
+      
+    }
+  }
+
+
+  /* Store skærme - 4 kolonner */
+  @media (min-width: 1400px) {
+    #game-list, .game-grid {
+      padding: 1em 8rem;
+    
+    }
+  }
+
+
+  /* =====================
+           GAME CARDS
    ===================== */
-
-
   .game-card {
     display: flex;
     flex-direction: column;
@@ -1113,39 +1147,7 @@ ul {
     font-size: 0.9rem;
   }
 
-  /* ================================
-     GAME GRID RESPONSIVE LAYOUT 
- ================================*/
-
-  #game-list, .game-grid {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(1, 1fr); /*mobil, 1 kolonne i grided.*/
-    gap: 1.5rem;
-    
-    margin: auto;
-    margin-bottom: 2rem;
-      padding: 1em 2rem;
-  } 
-
-  /* Tablet - op til 2 kolonner */
-  @media (min-width: 600px) {
-    #game-list, .game-grid {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /*den propper så mange kolonner ind der overhovedet er plads til. Med en min bredde på 250px for hver kolonne*/
-      gap: 2rem;
-      padding: 2em 8rem;
-      
-    }
-  }
-
-
-  /* Store skærme - 4 kolonner */
-  @media (min-width: 1400px) {
-    #game-list, .game-grid {
-      padding: 1em 8rem;
-    
-    }
-  }
+  
 
 
  /*===================================
@@ -1454,3 +1456,10 @@ ul {
   }
 }
 
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  width: 100%;
+  background-color: var(--primary);
+}
