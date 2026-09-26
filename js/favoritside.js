@@ -106,15 +106,15 @@ function displayFavorites() {
             <div class="game-info">
                 <div class="game-card-overskrift">
                     <h2>${game.title} </h2>
-                    <span class="game-rating"><img src="images/rating-ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</span>
+                    <span class="game-rating"><img src="images/rating-ikon.png" alt="" class="rating-icon"> ${game.rating}</span>
 
                 </div>
 
                 <ul class="info-liste">
                     <li class="game-shelf">Hylde ${game.shelf}</li>
-                    <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
-                    <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-                    <li class="game-genre"><img src="images/genre-ikon.svg" alt="Genre" class="genre-icon"> ${game.genre}</li>
+                    <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
+                    <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="" class="playtime-icon"> ${game.playtime} minutter</li>
+                    <li class="game-genre"><img src="images/genre-ikon.svg" alt="" class="genre-icon"> ${game.genre}</li>
                 </ul>
             </div>
         </article>
@@ -192,31 +192,31 @@ function displayFavorites() {
     dialogContent.innerHTML = `
     <article class="modal-game-card">
 
-        <div class="game-poster-container">
-            <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
-            <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
-                        <img src="${favoriteIconSrc}" alt="FavoritKnap" class="favorite-icon"/>
-            </button>
-        </div>
+          <figure class="game-poster-container">
+              <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
+              <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
+                          <img src="${favoriteIconSrc}" alt="FavoritKnap" class="favorite-icon"/>
+              </button>
+          </figure>
 
-        <div class="dialog-game-info">
-            <h1>${game.title} </h1>
-            <p class="game-description">${game.description}</p>
-            <p class="game-shelf">Hylde ${game.shelf}</p>
+          <div class="dialog-game-info">
+              <h1>${game.title} </h1>
+              <p class="game-description">${game.description}</p>
+              <p class="game-shelf">Hylde ${game.shelf}</p>
 
-            <ul class="game-icons-grid">
-                <li class="game-genre"><img src="images/genre-ikon.svg" alt="Genre" class="genre-icon"> ${game.genre}</li>
-                <li class="game-rating"><img src="images/rating-ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</li>
-                <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
-                <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter</li>
-                <li class="game-age"><img src="images/alder-ikon.svg" alt="Age" class="age-icon"> ${game.age}+</li>
-                <li class="game-difficulty"><img src="images/grad-ikon.svg" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</li>
-            </ul>
+              <ul class="game-icons-grid">
+                  <li class="game-genre"><img src="images/genre-ikon.svg" alt="" class="genre-icon"> ${game.genre}</li>
+                  <li class="game-rating"><img src="images/rating-ikon.png" alt="" class="rating-icon"> ${game.rating}</li>
+                  <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
+                  <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="" class="playtime-icon"> ${game.playtime} minutter</li>
+                  <li class="game-age"><img src="images/alder-ikon.svg" alt="" class="age-icon"> ${game.age}+</li>
+                  <li class="game-difficulty"><img src="images/grad-ikon.svg" alt="" class="difficulty-icon"> ${game.difficulty}</li>
+              </ul>
 
-            <p class="game-rules">${game.rules}</p>
-            </div>
-        </article>
-    `;
+              <p class="game-rules">${game.rules}</p>
+              </div>
+          </article>
+      `;
 
     // Favoritknappen inde i modalen
     const modalFavoriteButton = dialogContent.querySelector(".favorite-btn");
