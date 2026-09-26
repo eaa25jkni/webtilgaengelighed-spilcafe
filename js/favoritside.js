@@ -105,7 +105,7 @@ function displayFavorites() {
                 
             <div class="game-info">
                 <div class="game-card-overskrift">
-                    <h2>${game.title} </h2>
+                    <h3>${game.title} </h3>
                     <span class="game-rating"><img src="images/rating-ikon.png" alt="" class="rating-icon"> ${game.rating}</span>
 
                 </div>
