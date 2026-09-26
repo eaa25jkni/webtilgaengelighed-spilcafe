@@ -76,7 +76,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  overflow-x: hidden;
+  overflow-x: hidden; 
   font-family: poppins-medium, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
@@ -239,7 +239,7 @@ ul {
   }
 
   .main-nav {
-    display: block;
+    display: none;
     position: fixed;
     top: 4.5em;
     right: 0;
@@ -255,6 +255,7 @@ ul {
   }
 
   .main-nav.open {
+    display: block;
     transform: translateX(0); /*nustiller position så den bliver synlig på skærmen*/
   }
 
@@ -323,9 +324,9 @@ ul {
     flex-direction: column;
     width: 100%;
     background-color: #fff3f1;
-    background-image: url('../images/baggrund-kodning.svg');
+    background-image: url('../images/baggrund.svg');
     
-    background-position: center;
+    background-position: center ;
     padding: 5em 8em;
     
    }
