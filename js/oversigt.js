@@ -261,8 +261,8 @@ function initFilterPanel() {
     const fav = isFavorite(id);
         button.setAttribute("aria-pressed", fav) //tilføjer antributten aria-pressed
         button.querySelector("img").src = fav 
-        ? "images/favorit-fyldt-ikon.png" //hvis fav er sand, så skal hjertet være fyldt
-        : "images/favorit-tomt-ikon.png"; //hvis falsk skal hjertet være tomt
+        ? "images/favorit-fyldt-ikon.webp" //hvis fav er sand, så skal hjertet være fyldt
+        : "images/favorit-tomt-ikon.webp"; //hvis falsk skal hjertet være tomt
     }
   
 
@@ -279,10 +279,10 @@ function initFilterPanel() {
           let favoriteIcon
 
           if (isFavorite(game.id)) { //hvis favorit id'et er true, så skal der vises en fyldt hjerte
-              favoriteIcon = "images/favorit-fyldt-ikon.png"
+              favoriteIcon = "images/favorit-fyldt-ikon.webp"
 
           } else { //hvis ikke så skal stjernen være tom
-              favoriteIcon = "images/favorit-tomt-ikon.png"
+              favoriteIcon = "images/favorit-tomt-ikon.webp"
           }
 
           const loadingOptimize = index < 4 ? "eager" : "lazy";   //De fire første kort bliver vist above the fold, så de skal ik have lazy loading på. Derfor opstiller vi en betingelse, hvor hvis index er under fire skal loading"eager" på eller skal lazy på.
@@ -298,7 +298,7 @@ function initFilterPanel() {
                   <div class="game-card-overskrift">
                       <h3>${game.title} </h3>
                       <div class="game-rating" aria-label="${game.rating} ud af 5">
-                          <img src="images/rating-ikon.png" alt="" class="rating-icon">${game.rating}
+                          <img src="images/rating-ikon.webp" alt="" class="rating-icon">${game.rating}
                       </div>  
 
                   </div>
@@ -388,8 +388,8 @@ function initFilterPanel() {
       // Byg HTML struktur dynamisk
       const dialogContent = document.querySelector("#dialog-content");
       const favoriteIconSrc = isFavorite(game.id)
-          ? "images/favorit-fyldt-ikon.png"
-          : "images/favorit-tomt-ikon.png";
+          ? "images/favorit-fyldt-ikon.webp"
+          : "images/favorit-tomt-ikon.webp";
 
       dialogContent.innerHTML = `
       <article class="modal-game-card">
@@ -408,7 +408,7 @@ function initFilterPanel() {
 
               <ul class="game-icons-grid">
                   <li class="game-genre"><img src="images/genre-ikon.svg" alt="" class="genre-icon"> ${game.genre}</li>
-                  <li class="game-rating"><img src="images/rating-ikon.png" alt="" class="rating-icon"> ${game.rating}</li>
+                  <li class="game-rating"><img src="images/rating-ikon.webp" alt="" class="rating-icon"> ${game.rating}</li>
                   <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
                   <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="" class="playtime-icon"> ${game.playtime} minutter</li>
                   <li class="game-age"><img src="images/alder-ikon.svg" alt="" class="age-icon"> ${game.age}+</li>

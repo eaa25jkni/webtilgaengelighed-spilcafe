@@ -100,13 +100,13 @@ function displayFavorites() {
         <article class="game-card" tabindex="0">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
                 <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
-                    <img src="images/favorit-fyldt-ikon.png" alt="FavoritKnap" class="favorite-icon"/>
+                    <img src="images/favorit-fyldt-ikon.webp" alt="FavoritKnap" class="favorite-icon"/>
                 </button>
                 
             <div class="game-info">
                 <div class="game-card-overskrift">
                     <h3>${game.title} </h3>
-                    <span class="game-rating"><img src="images/rating-ikon.png" alt="" class="rating-icon"> ${game.rating}</span>
+                    <span class="game-rating"><img src="images/rating-ikon.webp" alt="" class="rating-icon"> ${game.rating}</span>
 
                 </div>
 
@@ -186,8 +186,8 @@ function displayFavorites() {
     // Byg HTML struktur dynamisk
     const dialogContent = document.querySelector("#dialog-content");
     const favoriteIconSrc = isFavorite(game.id)
-        ? "images/favorit-fyldt-ikon.png"
-        : "images/favorit-tomt-ikon.png";
+        ? "images/favorit-fyldt-ikon.webp"
+        : "images/favorit-tomt-ikon.webp";
 
     dialogContent.innerHTML = `
     <article class="modal-game-card">
@@ -206,7 +206,7 @@ function displayFavorites() {
 
               <ul class="game-icons-grid">
                   <li class="game-genre"><img src="images/genre-ikon.svg" alt="" class="genre-icon"> ${game.genre}</li>
-                  <li class="game-rating"><img src="images/rating-ikon.png" alt="" class="rating-icon"> ${game.rating}</li>
+                  <li class="game-rating"><img src="images/rating-ikon.webp" alt="" class="rating-icon"> ${game.rating}</li>
                   <li class="game-players"><img src="images/antalspillere-ikon.svg" alt="" class="players-icon"> ${game.players.min}-${game.players.max} spillere</li>
                   <li class="game-playtime"><img src="images/spiltid-ikon.svg" alt="" class="playtime-icon"> ${game.playtime} minutter</li>
                   <li class="game-age"><img src="images/alder-ikon.svg" alt="" class="age-icon"> ${game.age}+</li>
