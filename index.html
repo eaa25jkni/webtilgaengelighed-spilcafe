@@ -63,6 +63,8 @@
       </section>
 
       <section class="filter-sektion">
+
+        <!--Søgefelt-->
         <search class="header-search">
           <label for="header-search-input" class="gem">Søg spil efter titel</label>
           <input
@@ -72,28 +74,24 @@
           />
         </search>
 
-        <p id="search-results" class="gem" aria-live="polite"></p>
-
-        
+        <!--Filter knap-->
         <button
           type="button"
           id="filter-toggle"
           class="filter-toggle"
-          aria-label="Åbn filtre"
-        >
+          aria-label="Åbn filtre">
+
           <img src="images/filtrerings-ikon.png" alt="" class="filter-icon" />
           <span id="filter-badge" class="filter-badge" style="display: none"
-            >0</span
-          >
+            >0</span>
         </button>
 
-      </section>
 
-
-      <!-- Filter dropdown panel -->
+        <!-- Filter dropdown panel -->
       <form class="filter-panel" id="filter-panel">
+
         <div class="filter-panel-content">
-          <button type="button" id="filter-panel-close" class="filter-panel-close" aria-label="Luk filter">&#10005;</button>
+          <button type="button" id="filter-panel-close" class="filter-panel-close" aria-label="Luk filter"><span>&#10005;</span></button>
           <h2>Filtrer spil</h2>
 
           <!-- Sorter efter -->
@@ -117,18 +115,19 @@
 
           <!-- Antal spillere -->
           <div class="filter-row">
-            <label for="header-players-from">Antal spillere:</label>
-            <div class="range-inputs">
+            <label for="header-players-from">Antal spillere (minium):</label>
+
               <input
                 type="number"
                 id="header-players-from"
-                placeholder="Fx. 2, 8"
+                class="range-inputs"
+                placeholder="Fx. 2"
                 min="1"
                 max="8"
                 step="1"
               />
-            </div>
           </div>
+          
 
           <!-- Spilletid -->
           <div class="filter-row">
@@ -155,32 +154,32 @@
 
           <!-- Alder -->
           <div class="filter-row">
-            <label for="header-age-from">Minium aldersgrænse:</label>
-            <div class="range-inputs">
+            <label for="header-age-from">Aldersgrænse (minium):</label>
+            
               <input
                 type="number"
                 id="header-age-from"
-                placeholder="Fx. 7, 18"
+                class="range-inputs"
+                placeholder="Fx. 18"
                 min="0"
                 max="100"
                 step="1"
               />
-            </div>
+            
           </div>
 
           <!-- Location -->
           <div class="filter-row">
-            <label for="location-select" aria-label="Vælg lokation">Placering:</label>
+            <label for="location-select">Lokation:</label>
             <select id="location-select" class="location-dropdown">
               <option value="all">Alle lokationer</option>
             </select>
           </div> 
 
-          
-        
 
+          <!-- Knapper ryd og vis -->
           <div class="filter-actions">
-            <button type="button" id="header-clear-filters" class="clear-btn">
+            <button type="reset" id="header-clear-filters" class="clear-btn">
               Ryd alle filtre
             </button>
             <button type="button" id="filter-close" class="close-btn">Vis resultater</button>
@@ -188,6 +187,10 @@
           
         </div>
       </form>
+
+      </section>
+
+
 
       <section>
         <div class="games-header">
