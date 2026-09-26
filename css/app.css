@@ -1124,6 +1124,11 @@ ul {
   justify-content: center;
   }
 
+  .game-age, .game-difficulty {
+    display: flex;
+    justify-content: flex-end;
+  }
+
 
   /* Icon styling game cards (og detaljeside)*/
   .players-icon,
@@ -1444,11 +1449,31 @@ ul {
 }
 
 
+/*=========================
+       Footer
+===========================*/
+
 footer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  width: 100%;
+  display: flex;
+  flex-direction: wrap;
+  flex-wrap: wrap;
+  padding: 1em 2em;
+  justify-content: space-between;
+  align-items: flex-end;
+
   background-color: var(--primary);
+  
+}
+
+.logo-footer img {
+  height: 10em;
+  width: 10em;
+
+}
+
+footer p {
+  color: var(--primary-light);
+  font-size: 16px;
 }
 
 
