@@ -381,10 +381,6 @@ ul {
    }
 
 
-
-
-
-
 /* ============================================================
    FILTERBAR (SØG/SORT/FILTER/PLAYTIME//RYD-KNAP)
    ===================== */
@@ -557,11 +553,6 @@ ul {
   transition: var(--transition);
 }
 
-.header-search input:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(199, 2, 0, 0.1);
-}
 
 
 /*===============
@@ -769,6 +760,7 @@ ul {
     background: transparent;
     color: var(--error);
     border-color: var(--error);
+    
   }
 
   .clear-btn:hover {
@@ -1056,10 +1048,7 @@ ul {
     border-color: var(--secondary);
   }
 
-  .game-card:focus-visible {
-    outline: 3px solid var(--secondary);
-    outline-offset: 2px;
-  }
+  
 
   .game-poster {
      width: 100%;
@@ -1193,11 +1182,7 @@ ul {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
-    .favorite-btn:focus-visible {
-      outline: 3px solid var(--secondary);
-      outline-offset: 2px;
-    }
-
+    
     /* Active state for mobile touch feedback */
     .favorite-btn:active {
       transform: scale(0.95);
@@ -1352,12 +1337,7 @@ ul {
     color: var(--text);
   }
 
-  /* Focus styles for keyboard navigation */
-  .game-card:focus-visible,
-  #close-dialog:focus-visible {
-    outline: 3px solid var(--secondary);
-    outline-offset: 2px;
-  }
+  
 
   /* Styling af hjerte ikon på detaljeside - samme styling som game cards */
 
@@ -1467,4 +1447,20 @@ footer {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   width: 100%;
   background-color: var(--primary);
+}
+
+
+
+/*=========================
+       Focus-visiable
+===========================*/
+.header-search input:focus-visible, .filter-toggle:focus-visible, .filter-panel-close:focus-visible,
+#header-sort-select:focus-visible, #header-genre-select:focus-visible, #header-players-from:focus-visible,
+#header-playtime-select:focus-visible, #header-difficulty-select:focus-visible, #header-age-from:focus-visible,
+#location-select:focus-visible, #header-clear-filters:focus-visible, #filter-close:focus-visible, 
+#main-sort-select:focus-visible, .game-card:focus-visible, .favorite-btn:focus-visible, #close-dialog:focus-visible,
+.active-filter-tag:focus-visible
+{
+  outline: 2px dashed var(--error);
+    
 }
