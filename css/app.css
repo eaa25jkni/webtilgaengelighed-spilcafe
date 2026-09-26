@@ -131,6 +131,8 @@ ul {
 }
 
 
+
+
 /* ============================
          HEADER DESIGN 
 ============================= */
@@ -167,6 +169,7 @@ ul {
   aspect-ratio: 2/2;
 }
 
+
 .nav-list {
   display: flex;
   flex-direction: row;
@@ -202,14 +205,12 @@ ul {
   font-weight: 700;
   text-decoration: none;
 
-  padding: 0.6em 1em;
+  padding: 0.5em 1em;
   border-radius: 100px;
 
 }
 
-.book-bord:hover {
-  background-color: var(--secondary);
-}
+
 
 
 .burgermenu {
@@ -223,6 +224,25 @@ ul {
 .burgermenu img {
   width: 3em;
   height: 3em;
+
+}
+
+.nav-list a:hover, 
+.favoritelist-link:hover,
+.burgermenu:hover {
+  color: rgb(218, 217, 214);
+}
+
+.book-bord:hover {
+  background-color: var(--secondary);
+}
+
+/*====Focus-visiable====*/
+.logo:focus-visible, .nav-list a:focus-visible, 
+.favoritelist-link:focus-visible, .book-bord:focus-visible,
+.burgermenu:focus-visible  {
+  outline: 3px dashed var(--primary-light);
+    outline-offset: 3px;
 
 }
 
@@ -323,7 +343,7 @@ ul {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #fff3f1;
+    background-color: #ffcccc;
     background-image: url('../images/baggrund.svg');
     
     background-position: center ;
@@ -369,12 +389,6 @@ ul {
    ===================== */
 
 
-#search-input {
-  flex: 1;
-  min-width: 120px;
-}
-
-#search-input,
 #genre-select,
 #sort-select {
   background: var(--bg-card);
@@ -387,16 +401,11 @@ ul {
   box-shadow: var(--shadow);
 }
 
-#search-input:focus,
+
 #genre-select:focus,
 #sort-select:focus {
   outline: 2px solid var(--secondary);
   border-color: var(--secondary);
-}
-
-#search-input::placeholder {
-  color: var(--text-light);
-  opacity: 1;
 }
 
 
@@ -1107,8 +1116,8 @@ ul {
   }
 
   .rating-icon {
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     
   }
 
@@ -1203,7 +1212,7 @@ ul {
     }
 
 /* =====================
-   GAME DIALOG
+    DIALOG/MODAL GAME
 ===================== */
 
    .modal-game-card {
@@ -1381,11 +1390,6 @@ ul {
     transform: scale(0.95);
     background: rgba(240, 240, 240, 1);
   }
-
-/* ==================
-   RESPONSIVT DESIGN
-   ================== */
-
 
 
 
