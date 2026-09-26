@@ -15,6 +15,9 @@
   /* Backgrounds - Dark Mode */
   --bg: #FAFAFA;
   --bg-card: #f5f4f4;
+  --bg-hero: #fbefd9;
+  /*#fed1d1*/
+  /*#fbefd9*/
 
   /* Semantic */
   /* Semantic */
@@ -346,7 +349,7 @@ ul {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #ffcccc;
+    background-color: var(--bg-hero);
     background-image: url('../images/baggrund.svg');
     
     background-position: center ;
@@ -1036,6 +1039,8 @@ ul {
     display: flex;
     flex-direction: column;
     background: var(--bg-card);
+  
+    border: 2px solid rgb(195, 195, 195);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
