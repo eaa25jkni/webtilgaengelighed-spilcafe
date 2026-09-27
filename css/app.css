@@ -7,12 +7,13 @@
   --secondary: rgba(202, 71, 69, 0.923);
   --primary-light: #fdfcf7;
   --secondary-light: #3c4043;
+  --focus: #ea4335;
 
-  /* Text - Dark Mode Colors */
+  /* Text  */
   --text: #1E1B1B;
   --text-light: #1E1B1B;  /*Bruges ikke*/
 
-  /* Backgrounds - Dark Mode */
+  /* Backgrounds */
   --bg: #FAFAFA;
   --bg-card: #f5f4f4;
   --bg-hero: #fbefd9;
@@ -385,6 +386,22 @@ ul {
 
    }
 
+   @media (max-width: 500px) {
+      #hero-spiloversigt {
+        
+        padding: 2em 2rem;
+        margin: auto;
+
+      }
+
+      #hero-spiloversigt p {
+         font-size: 16px;
+
+      }
+
+
+   }
+
 
 /* ============================================================
    FILTERBAR (SØG/SORT/FILTER/PLAYTIME//RYD-KNAP)
@@ -465,9 +482,9 @@ ul {
 }
 
 #clear-filters:hover {
-  background: var(--error);
+  background: var(--focus);
   color: white;
-  border-color: var(--error);
+  border-color: var(--focus);
   transform: translateY(-2px);
 }
 
@@ -612,7 +629,7 @@ ul {
   position: absolute;
   top: -5px;
   right: -5px;
-  background: var(--error);
+  background: var(--focus);
   color: white;
   border-radius: 50%;
   width: 20px;
@@ -672,7 +689,7 @@ ul {
   }
 
   .filter-panel-close:hover {
-    background-color: var(--error);
+    background-color: var(--focus);
     color: var(--primary-light);
   }
 
@@ -763,13 +780,13 @@ ul {
 
   .clear-btn {
     background: transparent;
-    color: var(--error);
-    border-color: var(--error);
+    color: var(--focus);
+    border-color: var(--focus);
     
   }
 
   .clear-btn:hover {
-    background: var(--error);
+    background: var(--focus);
     color: white;
   }
 
@@ -798,6 +815,8 @@ ul {
     
     font-size: 0.9rem;
   }
+
+  
 
   .filter-sektion {
     padding: 1em 2em;
@@ -1265,7 +1284,7 @@ ul {
   }
 
   #close-dialog:hover {
-    background: var(--error);
+    background: var(--focus);
     color: white;
     transform: scale(1.1);
   }
@@ -1528,6 +1547,6 @@ footer p {
 #main-sort-select:focus-visible, .game-card:focus-visible, .favorite-btn:focus-visible, #close-dialog:focus-visible,
 .active-filter-tag:focus-visible
 {
-  outline: 2px dashed var(--error);
+  outline: 2px dashed var(--focus);
     
 }
