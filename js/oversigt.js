@@ -261,7 +261,7 @@ function initFilterPanel() {
     const fav = isFavorite(id);
         button.setAttribute("aria-pressed", fav) //tilføjer antributten aria-pressed
         button.querySelector("img").src = fav 
-        ? "images/favorit-fyldt-ikon.webp" //hvis fav er sand, så skal hjertet være fyldt
+        ? "images/favorit-fyldt-ikon.svg" //hvis fav er sand, så skal hjertet være fyldt
         : "images/favorit-tomt-ikon.webp"; //hvis falsk skal hjertet være tomt
     }
   
@@ -279,7 +279,7 @@ function initFilterPanel() {
           let favoriteIcon
 
           if (isFavorite(game.id)) { //hvis favorit id'et er true, så skal der vises en fyldt hjerte
-              favoriteIcon = "images/favorit-fyldt-ikon.webp"
+              favoriteIcon = "images/favorit-fyldt-ikon.svg"
 
           } else { //hvis ikke så skal stjernen være tom
               favoriteIcon = "images/favorit-tomt-ikon.webp"
@@ -388,7 +388,7 @@ function initFilterPanel() {
       // Byg HTML struktur dynamisk
       const dialogContent = document.querySelector("#dialog-content");
       const favoriteIconSrc = isFavorite(game.id)
-          ? "images/favorit-fyldt-ikon.webp"
+          ? "images/favorit-fyldt-ikon.svg"
           : "images/favorit-tomt-ikon.webp";
 
       dialogContent.innerHTML = `

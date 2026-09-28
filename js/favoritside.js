@@ -100,7 +100,7 @@ function displayFavorites() {
         <article class="game-card" tabindex="0">
                 <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
                 <button type="button" class="favorite-btn" data-id="${game.id}" aria-pressed="${isFavorite(game.id)}" aria-label="Favoritknap">
-                    <img src="images/favorit-fyldt-ikon.webp" alt="FavoritKnap" class="favorite-icon"/>
+                    <img src="images/favorit-fyldt-ikon.svg" alt="FavoritKnap" class="favorite-icon"/>
                 </button>
                 
             <div class="game-info">
@@ -186,7 +186,7 @@ function displayFavorites() {
     // Byg HTML struktur dynamisk
     const dialogContent = document.querySelector("#dialog-content");
     const favoriteIconSrc = isFavorite(game.id)
-        ? "images/favorit-fyldt-ikon.webp"
+        ? "images/favorit-fyldt-ikon.svg"
         : "images/favorit-tomt-ikon.webp";
 
     dialogContent.innerHTML = `

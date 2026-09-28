@@ -17,10 +17,7 @@
   --bg: #FAFAFA;
   --bg-card: #f5f4f4;
   --bg-hero: #fbefd9;
-  /*#fed1d1*/
-  /*#fbefd9*/
 
-  /* Semantic */
   /* Semantic */
   --success: #34a853;
   --warning: #fbc02d;
@@ -52,13 +49,6 @@
   font-style: normal;
 }
 
-
-.dm-sans-bold {
-  font-family: "DM Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
 
 .dm-sans-medium {
   font-family: "DM Sans", sans-serif;
@@ -1023,7 +1013,7 @@ ul {
   #game-list, .game-grid {
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(1, 1fr); /*mobil, 1 kolonne i grided.*/
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /*mobil, 1 kolonne i grided.*/
     gap: 1.5rem;
     
     margin: auto;
@@ -1032,18 +1022,18 @@ ul {
   } 
 
   /* Tablet - op til 2 kolonner */
-  @media (min-width: 600px) {
+  @media (min-width: 400px) {
     #game-list, .game-grid {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /*den propper så mange kolonner ind der overhovedet er plads til. Med en min bredde på 250px for hver kolonne*/
-      gap: 2rem;
-      padding: 2em 8rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /*den propper så mange kolonner ind der overhovedet er plads til. Med en min bredde på 250px for hver kolonne*/
+      gap: 1.5rem;
+      padding: 2em 4rem;
       
     }
   }
 
 
   /* Store skærme - 4 kolonner */
-  @media (min-width: 1400px) {
+  @media (min-width: 901px) {
     #game-list, .game-grid {
       padding: 1em 8rem;
     
